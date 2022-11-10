@@ -1,0 +1,51 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "quotes": ["error", "single"],
+    "no-console": 0, // Remember, this means error!
+    "semi": ["error", "never"],
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-interface": [
+      "warn",
+      {
+        "allowSingleExtends": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    }
+  ],
+  "globals": {
+    "document": true,
+    "global": true,
+    "window": true
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": [
+        ["@assets", "./src/assets"],
+        ["@pages", "./src/pages"],
+        ["@contexts", "./src/contexts"],
+        ["@components", "./src/components"],
+        ["@modules", "./src/modules"],
+        ["@sections", "./src/sections"],
+        ["@themes", "./src/themes"],
+        ["@", "./src"]
+      ]
+    }
+  }
+}

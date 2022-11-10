@@ -1,0 +1,31 @@
+{
+  "name": "@cloudmana/root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A repo for Cloudmana",
+  "author": "thinh@thinhhv.com",
+  "license": "ISC",
+  "main": "index.js",
+  "workspaces": {
+    "packages": [
+      "workspaces/*"
+    ]
+  },
+  "scripts": {
+    "start:app": "yarn app start",
+    "start:api": "yarn api start",
+    "format": "yarn app format && yarn api format",
+    "lint": "yarn app lint && yarn api lint",
+    "build": "yarn app build && yarn api build",
+    "app": "yarn workspace @cloudmana/frontend",
+    "api": "yarn  workspace @cloudmana/backend"
+  },
+  "keywords": [
+    "cloudman",
+    "cloudmana",
+    "nestjs",
+    "react",
+    "monorepo",
+    "workspaces"
+  ]
+}

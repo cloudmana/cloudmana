@@ -1,0 +1,6 @@
+/public
+/build
+/node_modules
+/src/assets
+/modules
+# /src/service-worker/**/*.ts
