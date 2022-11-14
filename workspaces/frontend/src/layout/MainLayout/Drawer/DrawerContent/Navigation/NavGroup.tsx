@@ -1,7 +1,12 @@
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 // material-ui
-import { Box, List, Typography } from '@mui/material'
+import {
+  Box,
+  List,
+  Typography,
+} from '@mui/material'
 
 // project import
 import NavItem from './NavItem'
@@ -13,6 +18,8 @@ export interface NavGroupProps {
 }
 
 const NavGroup = ({ item }: NavGroupProps) => {
+  const [open, setOpen] = React.useState(false)
+
   const menu = useSelector((state: any) => state.menu)
   const { drawerOpen } = menu
 
@@ -20,9 +27,13 @@ const NavGroup = ({ item }: NavGroupProps) => {
     switch (menuItem.type) {
       case 'collapse':
         return (
-          <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }}>
-            collapse - only available in paid version
-          </Typography>
+          <NavItem
+            key={menuItem.id}
+            item={menuItem}
+            level={menuItem.level || 1}
+            open={open}
+            setOpen={setOpen}
+          />
         )
       case 'item':
         return <NavItem key={menuItem.id} item={menuItem} level={1} />
@@ -33,7 +44,7 @@ const NavGroup = ({ item }: NavGroupProps) => {
           </Typography>
         )
     }
-  })
+  }) 
 
   return (
     <List
