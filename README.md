@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://thinhhv.com/cloudmana" target="blank">
-    <img style="width: 120px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
+    <img style="width: 150px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
   </a>
 </p>
 
@@ -36,6 +36,25 @@ yarn api build
 yarn app start:prod
 yarn api start:prod
 ```
+
+## Techstack & Requirements
+
+- Backend:
+  - NodeJS (recommend v14 or later)
+  - Yarn
+  - Support databases: SQLite (default), MongoDB.
+- Frontend:
+  - ReactJS
+
+## Development:
+
+- Migration
+
+  ```bash
+  yarn api migrate:create eggs
+  yarn api migrate:up
+  yarn api migrate:down
+  ```
 
 ## Support
 

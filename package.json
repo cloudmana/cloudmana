@@ -18,7 +18,7 @@
     "lint": "yarn app lint && yarn api lint",
     "build": "yarn app build && yarn api build",
     "app": "yarn workspace @cloudmana/frontend",
-    "api": "yarn  workspace @cloudmana/backend"
+    "api": "yarn workspace @cloudmana/backend"
   },
   "keywords": [
     "cloudman",

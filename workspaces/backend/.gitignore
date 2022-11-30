@@ -2,6 +2,11 @@
 dist
 build
 node_modules
+db_data
+swagger-2.0.json
+swagger.json
+config/*.local.yml
+config/local.yml
 
 # Logs
 logs

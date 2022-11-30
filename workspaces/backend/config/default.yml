@@ -1,0 +1,55 @@
+node_env: "development"
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  api:
+    version: 1.0.0
+    baseUrl: /api/v1/cloudmana
+  swagger:
+    name: api-cloudmana
+    description: Cloudmana
+    hostname: 0.0.0.0:8080
+    schema: http
+    baseUrl: /docs/cloudmana
+
+auth:
+  jwt:
+    expiresIn: 2d
+    expiresInRefreshToken: 30d
+  swagger:
+    enable: false
+    username: cloudmana
+    password: cloudmana
+
+database:
+  default: sqlite
+  sqlite:
+    database: db_data/cloudmana.db
+  mongodb:
+    uri: mongodb://localhost/cloudmana
+
+redis:
+  uri: redis://localhost/0
+  prefix: cloudmana
+
+secrets:
+  aws:
+    accessKeyId: ""
+    secretAccessKey: ""
+    s3Bucket: "cloudmana"
+    s3Path: "images"
+    regionName: "us-east-1"
+  telegram:
+    apiToken: ""
+    uid: 1234567
+
+services:
+  cronjob:
+    enable: false
+  telegram:
+    enable: false
+
+logger:
+  level: debug
+  autoLogging: true

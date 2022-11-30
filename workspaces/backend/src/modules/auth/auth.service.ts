@@ -1,18 +1,18 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Users } from './user.entity'
+import { User } from '../user/user.entity'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(Users) private userRepository: Repository<Users>,
+    @InjectRepository(User) private userRepository: Repository<User>,
     private jwt: JwtService,
   ) {}
 
-  async signup(user: Users): Promise<Users> {
+  async signup(user: User): Promise<User> {
     const salt = await bcrypt.genSalt()
     const hash = await bcrypt.hash(user.password, salt)
     user.password = hash
@@ -23,6 +23,7 @@ export class AuthService {
     const foundUser = await this.userRepository.findOne({ where: { username } })
     if (foundUser) {
       if (await bcrypt.compare(password, foundUser.password)) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password, ...result } = foundUser
         return result
       }
@@ -31,6 +32,7 @@ export class AuthService {
     }
     return null
   }
+
   async login(user: any) {
     const payload = { username: user.username, sub: user.id, role: user.role }
 

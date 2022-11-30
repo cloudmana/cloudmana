@@ -1,0 +1,24 @@
+{
+  "psi-header.templates": [
+    {
+      "language": "*",
+      "template": [
+        "@since <<filecreated('Y/MM/DD')>>",
+        "@author <<author>> <<<authoremail>>>",
+        "@description description",
+        "@copyright (c) <<year>> <<company>>"
+      ]
+    }
+  ],
+  "psi-header.variables": [
+    ["company", "Cloudmana Platform"],
+    ["author", "ThinhHV"],
+    ["authoremail", "thinh@thinhhv.com"]
+  ],
+  "psi-header.lang-config": [
+    {
+      "language": "*",
+      "begin": "/**"
+    }
+  ]
+}

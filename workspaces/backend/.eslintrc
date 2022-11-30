@@ -9,7 +9,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
     "no-console": 0, // Remember, this means error!
     "semi": ["error", "never"],
     "@typescript-eslint/ban-types": "off",
