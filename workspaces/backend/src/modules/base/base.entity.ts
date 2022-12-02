@@ -14,10 +14,8 @@ export class BaseEntity<T> extends _BaseEntity {
   }
 
   @ObjectIdColumn({ type: 'varchar' })
-  _id: ObjectId
-
   @PrimaryGeneratedColumn()
-  id: number
+  id: number | ObjectId
 
   @CreateDateColumn({
     default: new Date().toISOString(),

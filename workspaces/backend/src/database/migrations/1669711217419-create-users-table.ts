@@ -46,6 +46,14 @@ export class CreateUsersTable1592555965808 implements MigrationInterface {
             default: 1,
           },
           {
+            name: 'role',
+            type: 'string',
+          },
+          {
+            name: 'roles',
+            type: 'string',
+          },
+          {
             name: 'createdAt',
             type: 'datetime',
             default: 'now()',

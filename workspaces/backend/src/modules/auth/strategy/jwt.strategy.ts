@@ -2,9 +2,10 @@ import { ExtractJwt, Strategy } from 'passport-jwt'
 import { PassportStrategy } from '@nestjs/passport'
 import { Injectable } from '@nestjs/common'
 import config from 'src/common/config'
+import { IPayload } from '../interface/auth.interface'
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -14,19 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(payload: any) {
-    return { userId: payload.sub, username: payload.username, role: payload.role }
+  async validate(payload: IPayload) {
+    return { userId: payload.userId, username: payload.username, role: payload.role }
   }
-
-  // canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-  //   const req: Request = context.switchToHttp().getRequest()
-
-  //   const token = req.headers['Auth']
-
-  //   const payload = this.jwtService.verify(token)
-
-  //   console.log('VERIFICATION', payload)
-
-  //   return true
-  // }
 }

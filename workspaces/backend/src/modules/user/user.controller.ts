@@ -15,7 +15,6 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
@@ -25,12 +24,12 @@ import { UserSignupDto, UserUpdateDto } from './dto/user.dto'
 import { EntityId } from 'typeorm/repository/EntityId'
 import { plainToClass } from 'class-transformer'
 import { DeleteResult } from 'typeorm/index'
-import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard'
+import { AuthAdmin } from 'src/common/decorators'
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
-@ApiTags('admin/user')
-@UseGuards(JwtAuthGuard)
+@ApiTags('admin:user')
+@AuthAdmin()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

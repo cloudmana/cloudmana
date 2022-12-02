@@ -11,16 +11,14 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   WebSocketGateway,
-  WsException,
 } from '@nestjs/websockets'
+import { ApiBearerAuth } from '@nestjs/swagger'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard'
 import { SocketService } from './socket.service'
 
 @WebSocketGateway()
 export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit {
   constructor(
-    private readonly jwtAuthGuardService: JwtAuthGuard,
     private readonly socketService: SocketService,
     @InjectPinoLogger(SocketGateway.name)
     private readonly logger: PinoLogger,
@@ -30,13 +28,12 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect, 
     this.logger.info(`WebSocket running on path: ${server.path()}`)
   }
 
+  @ApiBearerAuth()
   async handleConnection(client: any, req: Request) {
-    const token: string = req.headers['authorization'] as string
+    const { user } = req as any
     try {
-      JwtAuthGuard.verifyJwt(token, WsException)
-
       // Set userId
-      client.userId = this.jwtAuthGuardService.getUserId(token)
+      client.userId = user?.id || user?._id
 
       if (!this.socketService.connectedSockets[client.userId]) {
         this.socketService.connectedSockets[client.userId] = []
@@ -45,7 +42,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect, 
       this.socketService.connectedSockets[client.userId].push(client)
       this.logger.info('User connected!', client.userId)
     } catch (error) {
-      this.logger.warn('User auth failed!', token)
+      this.logger.warn('User auth failed!')
       client.close(4403, error.error?.message?.message || 'JWT authentication failed')
     }
   }

@@ -8,6 +8,7 @@
 import { Column, Entity, Unique } from 'typeorm'
 import { Exclude, Expose } from 'class-transformer'
 import { BaseEntity } from '../base/base.entity'
+import { Role } from '../auth/enums/role.enum'
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity<User> {
@@ -31,6 +32,12 @@ export class User extends BaseEntity<User> {
 
   @Column({ default: true })
   isActive: boolean
+
+  @Column({ default: Role.User })
+  role: string
+
+  @Column({ default: Role.User })
+  roles: string
 
   @Expose()
   get fullName(): string {

@@ -15,19 +15,17 @@ import { User } from '../../user/user.entity'
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
-  constructor(
-    @InjectRepository(User) private repository: Repository<User>,
-  ) {
+  constructor(@InjectRepository(User) private repository: Repository<User>) {
     super({
-      jwtFromRequest: ExtractJwt.fromBodyField('refresh_token'),
+      jwtFromRequest: ExtractJwt.fromBodyField('refreshToken'),
       signOptions: { expiresIn: config.getString('auth.jwt.expiresInRefreshToken') },
-      secretOrKey: config.getString('auth.jwt.secret'),
+      secretOrKey: config.getString('auth.jwt.secretRefreshToken'),
     })
   }
 
   async validate(payload: any) {
     const { username } = payload
-    const user = await this.userRepository.findOne({ where: { username } })
+    const user = await this.repository.findOne({ where: [{ username }, { email: username }] })
 
     if (!user) {
       throw new UnauthorizedException()

@@ -40,7 +40,7 @@ export class RedisService {
       },
     })
     client.on('error', (err) => this.logger.error(err))
-    client.on('connect', (_) => this.logger.info('Connected successfully to server'))
+    client.on('connect', () => this.logger.info('Connected successfully to server'))
     return client
   }
 

@@ -1,10 +1,11 @@
 /**
- * @since 2022/11/30
+ * @since 2022/12/02
  * @author ThinhHV <thinh@thinhhv.com>
  * @description description
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-export function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
 }

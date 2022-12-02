@@ -18,6 +18,7 @@ auth:
     expiresIn: 15m
     expiresInRefreshToken: 1d
     secret: 'dd5aa1bc6e01bccc172ac6bce8bb1678'
+    secretRefreshToken: 'd9b77307a0f6541e6355a81886e167de'
   swagger:
     enable: false
     username: cloudmana

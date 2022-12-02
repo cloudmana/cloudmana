@@ -6,6 +6,8 @@ import { JwtService } from '@nestjs/jwt'
 import config from 'src/common/config'
 import { UserSignupDto } from '../user/dto/user.dto'
 import { User } from '../user/user.entity'
+import { IPayload } from './interface/auth.interface'
+import { RefreshTokenDto } from './dto/refresh-token.dto'
 
 @Injectable()
 export class AuthService {
@@ -28,15 +30,20 @@ export class AuthService {
     user.password = hash
     const _user = new User(user)
     _user.id = null
-    _user._id = null
     return await this.repository.save(_user)
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.id, role: user.email }
+    const payload: IPayload = {
+      username: user.username,
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      roles: user.roles,
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { createdAt, updatedAt, ..._user} = user
+    const { createdAt, updatedAt, ..._user } = user
     return {
       token: {
         accessToken: this.getAccessToken(payload),
@@ -46,18 +53,23 @@ export class AuthService {
     }
   }
 
-  async refreshToken(user: any, token) {
-    const payload = { username: user.account, sub: user.id, email: user.email }
-    // TODO: working
-    if (token) {
-      return {
-        token: {
-          accessToken: this.getAccessToken(payload),
-          refreshToken: this.getRefreshToken(payload),
-        },
-      }
-    } else {
-      return null
+  async refreshToken(user: any, _: RefreshTokenDto) {
+    const payload: IPayload = {
+      username: user.username,
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      roles: user.roles,
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, createdAt, updatedAt, ..._user } = user
+    return {
+      token: {
+        accessToken: this.getAccessToken(payload),
+        // refreshToken: this.getRefreshToken(payload),
+      },
+      // user: _user,
     }
   }
 
@@ -79,14 +91,14 @@ export class AuthService {
     throw new BadRequestException('Account or password is invalid')
   }
 
-  getAccessToken(payload: any) {
+  getAccessToken(payload: IPayload) {
     return this.jwt.sign(payload)
   }
 
-  getRefreshToken(payload: any) {
+  getRefreshToken(payload: IPayload) {
     return this.jwt.sign(payload, {
       expiresIn: config.getString('auth.jwt.expiresInRefreshToken'),
-      secret: config.getString('auth.jwt.secret'),
+      secret: config.getString('auth.jwt.secretRefreshToken'),
     })
   }
 }
