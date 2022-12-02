@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://thinhhv.com/cloudmana" target="blank">
-    <img style="width: 120px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
+    <img style="width: 150px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
   </a>
 </p>
 <p align="center">A dashboard for manage multi-cloud resources.</p>

@@ -1,0 +1,4 @@
+auth:
+  jwt:
+    expiresIn: 2d
+    expiresInRefreshToken: 30d
