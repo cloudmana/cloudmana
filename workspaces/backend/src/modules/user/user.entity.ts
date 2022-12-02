@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { Column, Entity, Unique } from 'typeorm'
 import { Exclude, Expose } from 'class-transformer'
 import { BaseEntity } from '../base/base.entity'
@@ -8,6 +15,7 @@ export class User extends BaseEntity<User> {
   @Column()
   email: string
 
+  @Column()
   @Unique(['username'])
   username: string
 

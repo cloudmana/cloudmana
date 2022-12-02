@@ -15,8 +15,9 @@ import { loggerConfig } from '../../shared/logger.helper'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from '../auth/auth.module'
-import { SocketModule } from '../socket/socket.module'
+// import { SocketModule } from '../socket/socket.module'
 import { UserModule } from '../user/user.module'
+import { AwsModule } from '../aws/aws.module'
 import config from 'src/common/config'
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 import AnyExceptionFilter from 'src/common/filters/any-exception.filter'
@@ -35,8 +36,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
     TypeOrmModule.forRootAsync({ useClass: TypeOrmModuleConfigService }),
     SharedModule,
     AuthModule,
-    SocketModule,
+    // SocketModule,
     UserModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [

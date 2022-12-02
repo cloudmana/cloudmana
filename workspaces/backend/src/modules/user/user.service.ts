@@ -1,11 +1,23 @@
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
+import { Injectable } from '@nestjs/common'
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { User } from './user.entity'
 import { UserRepository } from './user.repository'
-import { Injectable } from '@nestjs/common'
 import { BaseService } from '../base/base.service'
 
 @Injectable()
 export class UserService extends BaseService<User, UserRepository> {
-  constructor(repository: UserRepository) {
+  constructor(
+    repository: UserRepository,
+    @InjectPinoLogger(UserService.name)
+    private readonly logger: PinoLogger,
+  ) {
     super(repository)
   }
 
@@ -14,7 +26,6 @@ export class UserService extends BaseService<User, UserRepository> {
   // }
 
   getInactiveUsers(): Promise<User[]> {
-    this.logger.info('test')
     return this.repository.getInactiveUsers()
   }
 }

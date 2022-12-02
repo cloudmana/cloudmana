@@ -37,12 +37,14 @@ yarn app start:prod
 yarn api start:prod
 ```
 
-## Techstack & Requirements
+## Techstack
 
 - Backend:
   - NodeJS (recommend v14 or later)
   - Yarn
-  - Support databases: SQLite (default), MongoDB.
+  - Support databases: MongoDB, SQLite (default).
+  - WebSocket supported with socket.io
+  - Redis as cache
 - Frontend:
   - ReactJS
 

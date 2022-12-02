@@ -5,28 +5,29 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { ObjectId } from 'mongodb'
 
 export class BaseEntity<T> extends _BaseEntity {
-  constructor(partial: Partial<T>) {
+  constructor(partial?: Partial<T>) {
     super()
-    Object.assign(this, partial)
+    Object.assign(this, partial || {})
   }
 
-  @ObjectIdColumn()
-  _id: string
+  @ObjectIdColumn({ type: 'varchar' })
+  _id: ObjectId
 
   @PrimaryGeneratedColumn()
   id: number
 
   @CreateDateColumn({
-    default: 'now()',
+    default: new Date().toISOString(),
     nullable: true,
   })
-  createdAt: string
+  createdAt: Date
 
   @UpdateDateColumn({
-    default: 'now()',
+    default: new Date().toISOString(),
     nullable: true,
   })
-  updatedAt: string
+  updatedAt: Date
 }

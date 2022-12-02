@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
 import { INestApplication, ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { IoAdapter } from '@nestjs/platform-socket.io'
@@ -19,20 +21,19 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
   })
-  // const logger = app.get(Logger)
-  app.useLogger(app.get(Logger))
+  const logger = app.get(Logger)
+  app.useLogger(logger)
 
   await initializeApp(app)
   await initializeSwagger(app)
 
   // register socket adapter
-  app.useWebSocketAdapter(new IoAdapter() as any)
+  app.useWebSocketAdapter(new IoAdapter(app) as any)
 
   const lightship = await initializeLightship(app)
   await app.listen(config.port, () => {
-    console.log(
-      `Server running on ${config.swagger.schema}://${config.host}:${config.port}${config.baseUrl}`,
-    )
+    logger.log(`Using env ${process.env.NODE_ENV},${config.nodeEnv}`)
+    logger.log(`Server running on http://${config.host}:${config.port}${config.baseUrl}`)
   })
 
   lightship.signalReady()

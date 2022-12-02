@@ -6,7 +6,7 @@
  */
 
 import { DataSource, DatabaseType, DataSourceOptions } from 'typeorm'
-import config from './'
+import config from '../common/config'
 
 const dbConfig = config.database
 
@@ -14,6 +14,10 @@ const AppDataSource = new DataSource({
   type: dbConfig.client as DatabaseType,
   database: dbConfig.database,
   url: dbConfig.uri,
+  migrations: ['src/database/migrations/*.ts'],
+  cli: {
+    migrationsDir: 'src/database/migrations',
+  },
 } as DataSourceOptions)
 
 AppDataSource.initialize()

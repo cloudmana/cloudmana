@@ -15,8 +15,9 @@ server:
 
 auth:
   jwt:
-    expiresIn: 2d
-    expiresInRefreshToken: 30d
+    expiresIn: 15m
+    expiresInRefreshToken: 1d
+    secret: 'dd5aa1bc6e01bccc172ac6bce8bb1678'
   swagger:
     enable: false
     username: cloudmana

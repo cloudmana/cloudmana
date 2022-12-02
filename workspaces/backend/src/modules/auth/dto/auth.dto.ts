@@ -6,9 +6,9 @@
  */
 
 import { IsNotEmpty, IsString } from 'class-validator'
-import { ApiProperty, ApiResponseProperty } from '@nestjs/swagger'
+import { ApiProperty } from '@nestjs/swagger'
 
-export class UserSignupDto {
+export class SignupDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -60,7 +60,7 @@ export class UserSignupDto {
   lastName: string
 }
 
-export class UserUpdateDto {
+export class UpdateDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -82,7 +82,7 @@ export class UserUpdateDto {
   lastName: string
 }
 
-export class UserLoginRequestDto {
+export class LoginRequestDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -102,12 +102,4 @@ export class UserLoginRequestDto {
     default: '',
   })
   password: string
-}
-
-export class UserLoginDto {
-  @ApiResponseProperty()
-  firstName: string
-
-  @ApiResponseProperty()
-  lastName: string
 }

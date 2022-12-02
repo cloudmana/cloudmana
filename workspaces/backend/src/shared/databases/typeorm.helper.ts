@@ -22,6 +22,7 @@ export class TypeOrmModuleConfigService implements TypeOrmOptionsFactory {
       type: dbConfig.client as any,
       database: dbConfig.database,
       url: dbConfig.uri,
+      autoLoadEntities: true,
     }
   }
 

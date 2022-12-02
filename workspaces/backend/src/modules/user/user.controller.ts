@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import {
   Body,
   ClassSerializerInterceptor,
@@ -11,16 +18,18 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { User } from './user.entity'
 import { UserService } from './user.service'
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto'
+import { UserSignupDto, UserUpdateDto } from './dto/user.dto'
 import { EntityId } from 'typeorm/repository/EntityId'
 import { plainToClass } from 'class-transformer'
 import { DeleteResult } from 'typeorm/index'
-import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard'
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
+@ApiTags('admin/user')
 @UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -46,14 +55,14 @@ export class UserController {
   }
 
   @Post()
-  async create(@Body() userData: CreateUserDto): Promise<User> {
+  async create(@Body() userData: UserSignupDto): Promise<User> {
     const createdUser = await this.userService.store(userData)
 
     return plainToClass(User, createdUser)
   }
 
   @Put('/:id')
-  update(@Param('id') id: EntityId, @Body() userData: UpdateUserDto): Promise<User> {
+  update(@Param('id') id: EntityId, @Body() userData: UserUpdateDto): Promise<User> {
     return this.userService.update(id, userData)
   }
 

@@ -1,10 +1,19 @@
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { RedisService } from '../../shared/services/redis.service'
+import { RedisClientType } from 'redis'
 
 @Injectable()
 export class SocketService implements OnModuleInit, OnModuleDestroy {
-  public pubSubClient
+  public pubClient: RedisClientType
+  public subClient: RedisClientType
   public connectedSockets: { [key: string]: any[] } = {}
   private discoveryInterval
   private serviceId: string
@@ -26,11 +35,12 @@ export class SocketService implements OnModuleInit, OnModuleDestroy {
   }
 
   async onModuleInit() {
-    this.pubSubClient = await this.redisService.newRedisClient()
+    this.pubClient = this.redisService.newRedisClient() as RedisClientType
+    this.subClient = (await this.redisService.newRedisClient()) as RedisClientType
+    await this.pubClient.connect()
+    await this.subClient.connect()
 
-    this.pubSubClient.subscribe(this.serviceId)
-
-    this.pubSubClient.on('message', (channel, message) => {
+    this.subClient.subscribe(this.serviceId, (message) => {
       const { walletAddress, payload } = JSON.parse(message)
       this.sendMessage(walletAddress, payload, true)
     })
@@ -59,7 +69,7 @@ export class SocketService implements OnModuleInit, OnModuleDestroy {
         ids
           .filter((p) => p != this.serviceId)
           .forEach((id) => {
-            this.pubSubClient.publish(
+            this.pubClient.publish(
               id,
               JSON.stringify({
                 payload,

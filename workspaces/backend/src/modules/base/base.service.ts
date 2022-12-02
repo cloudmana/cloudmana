@@ -8,20 +8,12 @@
 import { BaseEntity, DeleteResult, In, Repository, FindOptionsWhere } from 'typeorm'
 import { IBaseService } from './interfaces/base.service.interface'
 import { EntityId } from 'typeorm/repository/EntityId'
-import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 
 export class BaseService<T extends BaseEntity, R extends Repository<T>> implements IBaseService<T> {
   protected readonly repository: R
-  protected readonly logger: PinoLogger
 
-  constructor(
-    repository: R,
-    @InjectPinoLogger(BaseService.name)
-    protected readonly _logger?: PinoLogger,
-  ) {
+  constructor(repository: R) {
     this.repository = repository
-    this.logger = _logger
-    this.logger.setContext(this.constructor.name)
   }
 
   index(): Promise<T[]> {

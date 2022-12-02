@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { of } from 'rxjs'
 import { BaseTransferInterceptor } from './response.interceptor'
 

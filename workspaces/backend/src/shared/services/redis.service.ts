@@ -12,7 +12,7 @@ import config from 'src/common/config'
 
 @Injectable()
 export class RedisService {
-  private redisClient = createClient()
+  private redisClient = this.newRedisClient()
 
   constructor(
     @InjectPinoLogger(RedisService.name)
@@ -20,12 +20,12 @@ export class RedisService {
   ) {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(async () => {
-      this.redisClient = await this.newRedisClient()
+      this.redisClient = this.newRedisClient()
       await this.redisClient.connect()
     })()
   }
 
-  public async newRedisClient() {
+  public newRedisClient() {
     const client = createClient({
       url: config.redisConfig.url,
       socket: {
@@ -40,7 +40,7 @@ export class RedisService {
       },
     })
     client.on('error', (err) => this.logger.error(err))
-    client.on('ready', (_) => this.logger.info('Connected successfully to server'))
+    client.on('connect', (_) => this.logger.info('Connected successfully to server'))
     return client
   }
 

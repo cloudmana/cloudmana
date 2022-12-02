@@ -1,8 +1,8 @@
-/*
- * @since 2022/09/21
- * @author Richard <richard@creatorchain.network>
+/**
+ * @since 2022/11/30
+ * @author ThinhHV <thinh@thinhhv.com>
  * @description description
- * Copyright (c) 2022 Creator Platform
+ * @copyright (c) 2022 Cloudmana Platform
  */
 
 import { Request } from 'express'
@@ -14,7 +14,7 @@ import {
   WsException,
 } from '@nestjs/websockets'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard'
 import { SocketService } from './socket.service'
 
 @WebSocketGateway()
