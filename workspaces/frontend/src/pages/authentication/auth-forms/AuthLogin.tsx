@@ -47,12 +47,12 @@ const AuthLogin = () => {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          account: '',
+          password: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          account: Yup.string().max(255).required('Account is required'),
           password: Yup.string().max(255).required('Password is required'),
         })}
         onSubmit={async (_values, { setErrors, setStatus, setSubmitting }) => {
@@ -71,21 +71,21 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                  <InputLabel htmlFor="account-login">Username / Email</InputLabel>
                   <OutlinedInput
-                    id="email-login"
-                    type="email"
-                    value={values.email}
-                    name="email"
+                    id="account-login"
+                    type="account"
+                    value={values.account}
+                    name="account"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter email address"
+                    placeholder="Enter username / email"
                     fullWidth
-                    error={Boolean(touched.email && errors.email)}
+                    error={Boolean(touched.account && errors.account)}
                   />
-                  {touched.email && errors.email && (
-                    <FormHelperText error id="standard-weight-helper-text-email-login">
-                      {errors.email}
+                  {touched.account && errors.account && (
+                    <FormHelperText error id="standard-weight-helper-text-account-login">
+                      {errors.account}
                     </FormHelperText>
                   )}
                 </Stack>
