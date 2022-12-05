@@ -66,7 +66,7 @@ Cloudmana is an MIT-licensed open source project. It can grow thanks to the spon
 
 - Author - [ThinhHV](https://thinhhv.com)
 - Website - [https://cloudmana.github.io](https://cloudmana.github.io)
-- Twitter - [@cloudmanaplatform](https://twitter.com/cloudmanaplatform)
+- Telegram - [@cloudmana](https://t.me/cloudmana)
 
 ## License
 
