@@ -48,7 +48,7 @@ yarn api start:prod
 - Frontend:
   - ReactJS
 
-## Development:
+## Development
 
 - Migration
 
@@ -57,6 +57,18 @@ yarn api start:prod
   yarn api migrate:up
   yarn api migrate:down
   ```
+
+## Roadmap
+
+- [ ] Migrate resources
+  - [ ] Between regions
+  - [ ] Between accounts
+  - [ ] Between cloud providers
+- [ ] Manage instances
+  - [ ] Schedule auto stop/start instances
+  - [ ] Spot instances
+    - [ ] Auto recover spot instances terminated
+- [ ] Updating...
 
 ## Support
 
