@@ -1,3 +1,10 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // project import
 import migration from './migration'
 import pages from './pages'

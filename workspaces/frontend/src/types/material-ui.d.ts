@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { Theme as _Theme, ThemeOptions as _ThemeOptions } from '@mui/material/styles'
 import { Palette, PaletteOptions } from '@mui/material/styles/createPalette'
 import { PaletteColorExtendProps, PaletteColorOptionsExtendProps } from 'themes/theme'

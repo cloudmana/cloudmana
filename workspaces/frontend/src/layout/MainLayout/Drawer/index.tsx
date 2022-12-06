@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { useMemo } from 'react'
 
 // material-ui
@@ -8,7 +15,7 @@ import { Box, Drawer, useMediaQuery } from '@mui/material'
 import DrawerHeader from './DrawerHeader'
 import DrawerContent from './DrawerContent'
 import MiniDrawerStyled from './MiniDrawerStyled'
-import { drawerWidth } from 'config'
+import { drawerWidth } from 'src/config'
 
 // ==============================|| MAIN LAYOUT - DRAWER ||============================== //
 

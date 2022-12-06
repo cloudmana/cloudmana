@@ -1,19 +1,25 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // material-ui
 import { Button, CardMedia, Link, Stack, Typography } from '@mui/material'
 
 // project import
-import MainCard from 'components/MainCard'
+import MainCard from 'src/components/MainCard'
 
 // assets
-import avatar from 'assets/images/logo.png'
-import AnimateButton from 'components/@extended/AnimateButton'
+import AnimateButton from 'src/components/@extended/AnimateButton'
 
 // ==============================|| DRAWER CONTENT - NAVIGATION CARD ||============================== //
 
 const NavCard = () => (
   <MainCard sx={{ bgcolor: 'grey.50', m: 3 }}>
     <Stack alignItems="center" spacing={2.5}>
-      <CardMedia component="img" image={avatar} sx={{ width: 112 }} />
+      <CardMedia component="img" image="/assets/images/logo.png" sx={{ width: 112 }} />
       <Stack alignItems="center">
         <Typography variant="h5">Cloudmana Pro</Typography>
         <Typography variant="h6" color="secondary">

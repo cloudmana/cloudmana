@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "removeComments": true,
@@ -11,7 +15,6 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -19,24 +22,31 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
-
     "target": "es5",
     "outDir": "build",
     "declaration": true,
     "sourceMap": true,
-
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
     "jsx": "preserve",
     "noEmit": true,
-    "isolatedModules": true,
-    "incremental": true
+    "incremental": true,
+    "isolatedModules": true
   },
-  "exclude": ["./build/**/*", "./node_modules/**/*"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.(png|jpg)"],
-  "typeRoots": ["./node_modules/@types", "./src/types"]
+  "exclude": [
+    "./build/**/*",
+    "./node_modules/**/*"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.(png|jpg)"
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./src/types"
+  ]
 }

@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // assets
 import { LoginOutlined, ProfileOutlined } from '@ant-design/icons'
 
@@ -18,7 +25,7 @@ const pages = {
       id: 'login1',
       title: 'Login',
       type: 'item',
-      url: '/login',
+      url: '/auth/login',
       icon: icons.LoginOutlined,
       target: true,
     },
@@ -26,7 +33,7 @@ const pages = {
       id: 'register1',
       title: 'Register',
       type: 'item',
-      url: '/register',
+      url: '/auth/register',
       icon: icons.ProfileOutlined,
       target: true,
     },

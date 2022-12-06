@@ -1,5 +1,12 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { forwardRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 
 // material-ui
@@ -17,7 +24,7 @@ import {
 } from '@mui/material'
 
 // project import
-import { activeItem } from 'store/reducers/menu'
+import { activeItem } from 'src/state/menu/actions'
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
@@ -44,7 +51,7 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
 
   let listItemProps: any = {
     component: forwardRef((props: any, ref: any) => (
-      <Link ref={ref} {...props} to={item.url} target={itemTarget} />
+      <Link ref={ref} {...props} href={item.url} target={itemTarget} />
     )),
   }
   if (item?.external) {
@@ -52,7 +59,7 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
   }
 
   const itemHandler = (id: any) => {
-    dispatch(activeItem({ openItem: [id] }))
+    dispatch(activeItem([id]))
   }
 
   const Icon = item.icon
@@ -74,7 +81,7 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
       .split('/')
       .findIndex((id) => id === item.id)
     if (currentIndex > -1) {
-      dispatch(activeItem({ openItem: [item.id] }))
+      dispatch(activeItem([item.id]))
     }
     // eslint-disable-next-line
   }, [])

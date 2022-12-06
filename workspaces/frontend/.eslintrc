@@ -9,6 +9,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
+    // note you must disable the base rule as it can report incorrect errors
+    "no-unused-vars": "off",
     "quotes": ["error", "single"],
     "no-console": 0, // Remember, this means error!
     "semi": ["error", "never"],
@@ -19,6 +21,14 @@
       "off",
       {
         "allowSingleExtends": false
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // or "error"
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
       }
     ]
   },

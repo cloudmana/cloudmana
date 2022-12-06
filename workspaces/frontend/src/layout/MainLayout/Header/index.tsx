@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // material-ui
 import { useTheme } from '@mui/material/styles'
 import { AppBar, IconButton, Toolbar, useMediaQuery } from '@mui/material'

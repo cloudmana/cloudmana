@@ -1,5 +1,12 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+// import { Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // material-ui
@@ -9,15 +16,15 @@ import { Box, Toolbar, useMediaQuery } from '@mui/material'
 // project import
 import Drawer from './Drawer'
 import Header from './Header'
-import navigation from 'menu-items'
-import Breadcrumbs from 'components/@extended/Breadcrumbs'
+import navigation from 'src/menu-items'
+import Breadcrumbs from 'src/components/@extended/Breadcrumbs'
 
 // types
-import { openDrawer } from 'store/reducers/menu'
+import { openDrawer } from 'src/state/menu/actions'
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
   const theme = useTheme()
   const matchDownLG = useMediaQuery(theme.breakpoints.down('xl'))
   const dispatch = useDispatch()
@@ -28,13 +35,13 @@ const MainLayout = () => {
   const [open, setOpen] = useState(drawerOpen)
   const handleDrawerToggle = () => {
     setOpen(!open)
-    dispatch(openDrawer({ drawerOpen: !open }))
+    dispatch(openDrawer(!open))
   }
 
   // set media wise responsive drawer
   useEffect(() => {
     setOpen(!matchDownLG)
-    dispatch(openDrawer({ drawerOpen: !matchDownLG }))
+    dispatch(openDrawer(!matchDownLG))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchDownLG])
@@ -51,7 +58,7 @@ const MainLayout = () => {
       <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 2, sm: 3 } }}>
         <Toolbar />
         <Breadcrumbs navigation={navigation} title />
-        <Outlet />
+        {children}
       </Box>
     </Box>
   )

@@ -1,6 +1,14 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // material-ui
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs'
@@ -12,7 +20,7 @@ import MainCard from '../MainCard'
 // ==============================|| BREADCRUMBS ||============================== //
 
 const Breadcrumbs = ({ navigation, title, ...others }: any) => {
-  const location = useLocation()
+  const router = useRouter()
   const [main, setMain] = useState<any>()
   const [item, setItem] = useState<any>()
 
@@ -23,7 +31,7 @@ const Breadcrumbs = ({ navigation, title, ...others }: any) => {
         if (collapse.type && collapse.type === 'collapse') {
           getCollapse(collapse)
         } else if (collapse.type && collapse.type === 'item') {
-          if (location.pathname === collapse.url) {
+          if (router.pathname === collapse.url) {
             setMain(menu)
             setItem(collapse)
           }
@@ -43,8 +51,8 @@ const Breadcrumbs = ({ navigation, title, ...others }: any) => {
   })
 
   // only used for component demo breadcrumbs
-  if (location.pathname === '/breadcrumbs') {
-    location.pathname = '/dashboard/analytics'
+  if (router.pathname === '/breadcrumbs') {
+    router.pathname = '/dashboard/analytics'
   }
 
   let mainContent
@@ -57,7 +65,7 @@ const Breadcrumbs = ({ navigation, title, ...others }: any) => {
     mainContent = (
       <Typography
         component={Link}
-        to={document.location.pathname}
+        href={document.location.pathname}
         variant="h6"
         sx={{ textDecoration: 'none' }}
         color="textSecondary"
@@ -91,7 +99,7 @@ const Breadcrumbs = ({ navigation, title, ...others }: any) => {
               <MuiBreadcrumbs aria-label="breadcrumb">
                 <Typography
                   component={Link}
-                  to="/"
+                  href="/"
                   color="textSecondary"
                   variant="h6"
                   sx={{ textDecoration: 'none' }}

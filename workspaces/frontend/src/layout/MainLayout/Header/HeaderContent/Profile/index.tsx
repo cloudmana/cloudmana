@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { useRef, useState } from 'react'
 
 // material-ui
@@ -19,13 +26,13 @@ import {
 } from '@mui/material'
 
 // project import
-import MainCard from 'components/MainCard'
-import Transitions from 'components/@extended/Transitions'
+import MainCard from 'src/components/MainCard'
+import Transitions from 'src/components/@extended/Transitions'
 import ProfileTab from './ProfileTab'
 import SettingTab from './SettingTab'
 
 // assets
-import avatar1 from 'assets/images/users/avatar-1.png'
+import avatar1 from 'src/assets/images/users/avatar-1.png'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 
 export interface TabPanelProps {
