@@ -1,3 +1,10 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // assets
 import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons'
 
@@ -25,7 +32,7 @@ const support = {
       id: 'documentation',
       title: 'Documentation',
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis-react/',
+      url: 'https://cloudmana.gitbook.io/',
       icon: icons.QuestionOutlined,
       external: true,
       target: true,

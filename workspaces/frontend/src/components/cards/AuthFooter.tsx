@@ -1,3 +1,10 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // material-ui
 import { useMediaQuery, Container, Link, Typography, Stack } from '@mui/material'
 
@@ -15,15 +22,15 @@ const AuthFooter = () => {
         textAlign={matchDownSM ? 'center' : 'inherit'}
       >
         <Typography variant="subtitle2" color="secondary" component="span">
-          &copy; Mantis React Dashboard Template By&nbsp;
+          &copy; Cloudmana Dashboard by&nbsp;
           <Typography
             component={Link}
             variant="subtitle2"
-            href="https://codedthemes.com"
+            href="https://thinhhv.com"
             target="_blank"
             underline="hover"
           >
-            CodedThemes
+            ThinhHV
           </Typography>
         </Typography>
 
@@ -36,7 +43,7 @@ const AuthFooter = () => {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://material-ui.com/store/contributors/codedthemes/"
+            href="https://mui.com/"
             target="_blank"
             underline="hover"
           >
@@ -46,7 +53,7 @@ const AuthFooter = () => {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://codedthemes.com"
+            href="https://cloudmana.gitbook.io/policy"
             target="_blank"
             underline="hover"
           >
@@ -56,7 +63,7 @@ const AuthFooter = () => {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://codedthemes.support-hub.io/"
+            href="https://github.com/cloudmana/cloudmana/discussions"
             target="_blank"
             underline="hover"
           >

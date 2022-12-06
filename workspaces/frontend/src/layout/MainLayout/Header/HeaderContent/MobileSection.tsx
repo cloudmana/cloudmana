@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import { useEffect, useRef, useState } from 'react'
 
 // material-ui
@@ -7,7 +14,7 @@ import { AppBar, Box, ClickAwayListener, IconButton, Paper, Popper, Toolbar } fr
 // project import
 import Search from './Search'
 import Profile from './Profile'
-import Transitions from 'components/@extended/Transitions'
+import Transitions from 'src/components/@extended/Transitions'
 
 // assets
 import { MoreOutlined } from '@ant-design/icons'

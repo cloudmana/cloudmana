@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // third-party
 import { merge } from 'lodash'
 

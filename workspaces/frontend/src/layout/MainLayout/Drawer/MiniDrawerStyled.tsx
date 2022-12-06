@@ -1,9 +1,16 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // material-ui
 import { styled } from '@mui/material/styles'
 import Drawer from '@mui/material/Drawer'
 
 // project import
-import { drawerWidth } from 'config'
+import { drawerWidth } from 'src/config'
 
 const openedMixin = (theme: any) => ({
   width: drawerWidth,

@@ -1,7 +1,15 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import PropTypes from 'prop-types'
 
 // third-party
 import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion/dist/framer-motion'
 
 // ==============================|| ANIMATION BUTTON ||============================== //
 

@@ -1,10 +1,18 @@
+/**
+ * @since 2022/12/05
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // material-ui
 import { useTheme } from '@mui/material/styles'
 import { Stack, Chip } from '@mui/material'
 
 // project import
 import DrawerHeaderStyled from './DrawerHeaderStyled'
-import Logo from 'components/Logo'
+import Logo from 'src/components/Logo'
+import env from 'src/config/env'
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -21,11 +29,11 @@ const DrawerHeader = ({ open }: DrawerHeaderProps) => {
       <Stack direction="row" spacing={1} alignItems="center">
         <Logo />
         <Chip
-          label={process.env.REACT_APP_VERSION}
+          label={env.NEXT_APP_VERSION}
           size="small"
           sx={{ height: 16, '& .MuiChip-label': { fontSize: '0.625rem', py: 0.25 } }}
           component="a"
-          href="https://github.com/codedthemes/mantis-free-react-admin-template"
+          href="https://github.com/cloudmana/cloudmana"
           target="_blank"
           clickable
         />

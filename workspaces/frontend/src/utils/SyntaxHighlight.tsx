@@ -1,8 +1,15 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 import PropTypes from 'prop-types'
 
 // third-party
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 // ==============================|| CODE HIGHLIGHTER ||============================== //
 

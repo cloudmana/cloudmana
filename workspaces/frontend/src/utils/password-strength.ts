@@ -1,3 +1,10 @@
+/**
+ * @since 2022/11/10
+ * @author ThinhHV <thinh@thinhhv.com>
+ * @description description
+ * @copyright (c) 2022 Cloudmana Platform
+ */
+
 // has number
 const hasNumber = (number: any) => new RegExp(/[0-9]/).test(number)
 
