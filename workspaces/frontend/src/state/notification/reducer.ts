@@ -23,16 +23,10 @@ export const initialNotificationState: NotificationState = {
 export default createReducer(initialNotificationState, (builder) =>
   builder
     .addCase(updateNotification, (state, { payload: { items = [] } }) => {
-      // const tempData = data || notification.data
-      // const tempLastBlockTimeRead = lastBlockTimeRead || notification.lastBlockTimeRead
-      // notification.total = tempData.filter((o: NftOrderHistory) => o.createdTime > tempLastBlockTimeRead).length
       state.notifications = [...items]
     })
-    .addCase(updateCountNumber, (state, { payload: { item = {} } }) => {
+    .addCase(updateCountNumber, (state: any, { payload: { item = {} } }) => {
       const { count, countAll } = item
-      // const tempData = data || notification.data
-      // const tempLastBlockTimeRead = lastBlockTimeRead || notification.lastBlockTimeRead
-      // notification.total = tempData.filter((o: NftOrderHistory) => o.createdTime > tempLastBlockTimeRead).length
       state.count = count
       state.countAll = countAll
     }),

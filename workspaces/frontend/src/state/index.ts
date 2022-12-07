@@ -18,7 +18,7 @@ import {
 } from 'redux-persist'
 
 import reducer from './reducer'
-import storage from 'redux-persist/lib/storage'
+import storage from 'src/config/storage'
 
 let store: any
 
@@ -49,7 +49,7 @@ function makeStore(preloadedState = undefined) {
   })
 }
 
-export const getOrCreateStore = (preloadedState = undefined) => {
+export const getOrCreateStore = (preloadedState: any = undefined) => {
   let _store = store ?? makeStore(preloadedState)
 
   // After navigating to a page with an initial Redux state, merge that state

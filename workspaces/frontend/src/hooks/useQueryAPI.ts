@@ -7,7 +7,7 @@
 
 import { useState } from 'react'
 
-export function useQueryAPI(callback, onSuccess?: any) {
+export function useQueryAPI(callback: any, onSuccess?: any) {
   const [dataApi, setDataApi] = useState<any>()
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 

@@ -5,7 +5,7 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQueryAPI } from 'src/hooks/useQueryAPI'
 import {
   getCountNumberNotification,
@@ -23,19 +23,19 @@ export function useUpdateNotification(filter?: ListNotificationFilter) {
     size: 10,
   }
   const dispatch = useAppDispatch()
-  const onSuccessGetListNotification = (data) => {
+  const onSuccessGetListNotification = (data: any) => {
     dispatch(updateNotification({ items: data.items }))
   }
-  const [filterNotification, setFilterNotification] =
+  const [_filterNotification, _setFilterNotification] =
     useState<ListNotificationFilter>(defaultNotificationFilter)
 
-  const onSuccessGetCountNotification = (data) => {
+  const onSuccessGetCountNotification = (data: any) => {
     dispatch(updateCountNumber({ item: data }))
   }
 
   const {
-    dataApi: listNotification,
-    isSuccess: dataListNotiSuccess,
+    dataApi: _listNotification,
+    isSuccess: _dataListNotiSuccess,
     callApi: callApiGetListNoti,
   } = useQueryAPI(
     () => getListNotification(filter || defaultNotificationFilter),
@@ -43,8 +43,8 @@ export function useUpdateNotification(filter?: ListNotificationFilter) {
   )
 
   const {
-    dataApi: countNotification,
-    isSuccess: dataCountNotiSuccess,
+    dataApi: _countNotification,
+    isSuccess: _dataCountNotiSuccess,
     callApi: callApiGetCountNoti,
   } = useQueryAPI(() => getCountNumberNotification(), onSuccessGetCountNotification)
 

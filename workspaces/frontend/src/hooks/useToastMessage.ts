@@ -5,9 +5,9 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { useNotification, NotificationProps } from '@vechaiui/notification'
+import { VariantType, useSnackbar } from 'notistack'
 
-export type StatusType = 'success' | 'failed' | 'rejected' | 'exceededAvailable' | 'fail'
+export type StatusType = 'success' | 'error'
 
 export type MessageType = {
   title: string
@@ -17,9 +17,8 @@ export type MessageType = {
 }
 
 export function useToastMessage() {
-  const notification = useNotification()
-
-  const noti = {
+  const { enqueueSnackbar } = useSnackbar()
+  const notify: any = {
     ['success']: {
       title: 'Success',
       description: 'Transaction has been performed successfully!',
@@ -27,32 +26,15 @@ export function useToastMessage() {
       position: 'top-right',
       className: 'max-w-[320px] sm:max-w-[380px]',
     },
-    ['rejected']: {
-      title: 'Rejected',
-      description: 'User rejected transaction!',
-      status: 'error',
-      position: 'top-right',
-      className: 'max-w-[320px] sm:max-w-[380px]',
-    },
-    ['fail']: {
-      title: 'Failed',
-      description: 'Transaction has been failed!',
-      status: 'error',
-      position: 'top-right',
-      className: 'max-w-[320px] sm:max-w-[380px] mr-4',
-    },
-    ['exceededAvailable']: {
-      title: 'Exceeded available token amount!',
-      description: 'Transaction will be failed!',
-      status: 'error',
-      position: 'top-right',
-      className: 'max-w-[320px] sm:max-w-[380px]',
-    },
   }
 
-  const showNoti = (status: string) => notification(noti[status])
+  const showNotify = (status: VariantType) =>
+    enqueueSnackbar(notify[status].description, {
+      variant: status,
+      anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
+    })
 
-  return [showNoti]
+  return [showNotify]
 }
 
 export const authState: Partial<Record<StatusType, MessageType>> = {
@@ -62,8 +44,8 @@ export const authState: Partial<Record<StatusType, MessageType>> = {
     status: 'success',
     position: 'top-right',
   },
-  failed: {
-    title: 'Failed',
+  error: {
+    title: 'Error',
     description: 'Failed to connect to wallet!',
     status: 'error',
     position: 'top-right',
@@ -71,7 +53,8 @@ export const authState: Partial<Record<StatusType, MessageType>> = {
 }
 
 export function useAuthToastMessage() {
-  const notification = useNotification()
-  const showMessage = (status: StatusType) => notification(authState[status] as NotificationProps)
+  const { enqueueSnackbar } = useSnackbar()
+  const showMessage = (status: StatusType) =>
+    enqueueSnackbar(authState[status]?.description, { variant: status as VariantType })
   return { showMessage }
 }

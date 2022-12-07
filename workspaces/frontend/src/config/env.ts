@@ -9,6 +9,7 @@ const env = {
   NEXT_APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION,
   NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL || 'https://www.example.com/',
   SERVER_API: process.env.NEXT_PUBLIC_SERVER_API,
+  SOCKET_API: process.env.NEXT_PUBLIC_SOCKET_API,
 }
 
 export default env

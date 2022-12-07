@@ -5,12 +5,10 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import React from 'react'
+
 // ==============================|| MINIMAL LAYOUT ||============================== //
 
-const MinimalLayout = ({ children }) => (
-  <>
-    {children}
-  </>
-)
+const MinimalLayout = ({ children }: React.PropsWithChildren) => <>{children}</>
 
 export default MinimalLayout

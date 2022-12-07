@@ -29,8 +29,9 @@ export default function Document() {
       })(window,document,'script','dataLayer','GTM-W3M946N');`,
           }}
         ></script> */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-FSKHX999PB" />
+        <Script id="gtag-0" async src="https://www.googletagmanager.com/gtag/js?id=G-FSKHX999PB" />
         <Script
+          id="gtag-1"
           dangerouslySetInnerHTML={{
             __html: `
 							window.dataLayer = window.dataLayer || [];
@@ -39,13 +40,12 @@ export default function Document() {
               gtag('js', new Date());
               gtag('config', 'G-FSKHX999PB');
               function ready(fn) {
-          var d = document;
-          (d.readyState === "loading") ? d.addEventListener("DOMContentLoaded", fn) : fn();
-        }
-
-          ready(function() {
-          document.querySelector(":root").style.setProperty("--vh", window.innerHeight / 100 + "px");
-        });
+                var d = document;
+                (d.readyState === "loading") ? d.addEventListener("DOMContentLoaded", fn) : fn();
+              }
+              ready(function() {
+                document.querySelector(":root").style.setProperty("--vh", window.innerHeight / 100 + "px");
+              });
 						`,
           }}
         />

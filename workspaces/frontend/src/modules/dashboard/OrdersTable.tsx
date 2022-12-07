@@ -221,7 +221,7 @@ export default function OrderTable() {
                   selected={isItemSelected}
                 >
                   <TableCell component="th" id={labelId} scope="row" align="left">
-                    <Link color="secondary" component={RouterLink} to="">
+                    <Link color="secondary" component={RouterLink} href="">
                       {row.trackingNo}
                     </Link>
                   </TableCell>

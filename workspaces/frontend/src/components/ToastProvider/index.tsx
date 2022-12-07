@@ -8,7 +8,12 @@
 import React, { useState, useContext, useCallback } from 'react'
 import ToastContainer from '../ToastContainer'
 
-const ToastContext = React.createContext(null)
+export interface ToastContextProps {
+  addToast?: any
+  removeToast?: any
+}
+
+const ToastContext = React.createContext<ToastContextProps>({})
 
 let id = 1
 
@@ -23,12 +28,12 @@ interface Toast {
   type: ToastTypes
 }
 
-const ToastProvider = ({ children }) => {
-  const [toasts, setToasts] = useState([])
+const ToastProvider = ({ children }: React.PropsWithChildren) => {
+  const [toasts, setToasts] = useState<any>([])
 
   const addToast = useCallback(
     (data: Toast) => {
-      setToasts((toasts) => [
+      setToasts((toasts: any) => [
         ...toasts,
         {
           id: id++,
@@ -41,8 +46,8 @@ const ToastProvider = ({ children }) => {
   )
 
   const removeToast = useCallback(
-    (id) => {
-      setToasts((toasts) => toasts.filter((t) => t.id !== id))
+    (id: any) => {
+      setToasts((toasts: any) => toasts.filter((t: any) => t.id !== id))
     },
     [setToasts],
   )

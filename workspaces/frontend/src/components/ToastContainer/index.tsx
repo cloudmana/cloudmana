@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   z-index: 9999;
 `
 
-const ToastContainer = ({ toasts }) => {
+const ToastContainer = ({ toasts }: any) => {
   const transitions = useTransition(toasts, {
     from: { right: '-100%' },
     enter: { right: '5%', marginLeft: '10px' },

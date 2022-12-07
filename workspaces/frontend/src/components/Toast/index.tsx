@@ -9,6 +9,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useToast } from '../ToastProvider'
 import { animated } from 'react-spring'
+import Image from 'src/components/Image'
 
 const Wrapper = styled(animated.div)`
   margin-right: 16px;
@@ -26,7 +27,13 @@ const Wrapper = styled(animated.div)`
   color: #ffffff;
 `
 
-const Toast = ({ children, id, style, type }) => {
+export interface ToastProps {
+  id: string
+  style: any
+  type: string
+}
+
+const Toast = ({ children, id, style, type }: React.PropsWithChildren<ToastProps>) => {
   const { removeToast } = useToast()
 
   useEffect(() => {
@@ -41,9 +48,9 @@ const Toast = ({ children, id, style, type }) => {
 
   return (
     <Wrapper style={style}>
-      {type === 'success' && <img src="/images/check-circle.svg" className="w-7 mr-3" />}
-      {type === 'error' && <img src="/images/x-circle-icon.svg" className="w-6 mr-3" />}
-      {type === 'warning' && <img src="/images/warning-triangle.svg" className="w-6 mr-3" />}
+      {type === 'success' && <Image src="/images/check-circle.svg" className="w-7 mr-3" />}
+      {type === 'error' && <Image src="/images/x-circle-icon.svg" className="w-6 mr-3" />}
+      {type === 'warning' && <Image src="/images/warning-triangle.svg" className="w-6 mr-3" />}
       {children}
       <button
         onClick={() => removeToast(id)}
