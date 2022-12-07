@@ -5,6 +5,8 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import 'simplebar/src/simplebar.css'
+import 'src/assets/third-party/apex-chart.css'
 import 'styles/global.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -18,11 +20,16 @@ import { setupAuthInterceptor } from '../utils/api'
 import ScrollTop from 'src/components/ScrollTop'
 import MainLayout from 'src/layout/MainLayout'
 import { Dots } from 'src/components/commons/Dots'
+import { SnackbarProvider } from 'notistack'
 
 setupAuthInterceptor(store)
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
+}
+
+export function reportWebVitals(metric: any) {
+  console.log(metric)
 }
 
 type AppPropsWithLayout = AppProps & {
@@ -76,7 +83,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <ReduxProvider store={store}>
         <PersistGate loading={<Dots>Loading</Dots>} persistor={persistor}>
           <ThemeCustomization>
-            <ScrollTop>{getLayout(<Component {...pageProps} />)}</ScrollTop>
+            <SnackbarProvider maxSnack={3}>
+              <ScrollTop>{getLayout(<Component {...pageProps} />)}</ScrollTop>
+            </SnackbarProvider>
           </ThemeCustomization>
         </PersistGate>
       </ReduxProvider>

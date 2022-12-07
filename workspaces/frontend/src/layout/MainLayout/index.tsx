@@ -24,7 +24,7 @@ import { openDrawer } from 'src/state/menu/actions'
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children }: React.PropsWithChildren) => {
   const theme = useTheme()
   const matchDownLG = useMediaQuery(theme.breakpoints.down('xl'))
   const dispatch = useDispatch()

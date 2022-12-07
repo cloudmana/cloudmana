@@ -40,10 +40,6 @@ export enum TimeFilterEnum {
   D30 = '30d',
 }
 
-export const updateBlockNumber = createAction<{
-  chainId: number
-  blockNumber: number
-}>('application/updateBlockNumber')
 export const setOpenModal = createAction<ApplicationModal | null>('application/setOpenModal')
 export const addPopup = createAction<{
   key?: string
@@ -51,8 +47,7 @@ export const addPopup = createAction<{
   content: PopupContent
 }>('application/addPopup')
 export const removePopup = createAction<{ key: string }>('application/removePopup')
-export const setKashiApprovalPending = createAction<string>('application/setKashiApprovalPending')
 export const updateStep = createAction<string>('application/updateStep')
 export const setPendingSwitchAcc = createAction<boolean>('application/setPendingSwitchAcc')
 export const setErrorApp = createAction<ErrorType>('application/setErrorApp')
-export const setTimeFilter = createAction<TimeFilterEnum | null>('application/setTimeFilter')
+export const setTimeFilter = createAction<TimeFilterEnum | any>('application/setTimeFilter')

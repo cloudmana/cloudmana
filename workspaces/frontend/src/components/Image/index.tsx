@@ -12,6 +12,7 @@ export interface ImageProps {
   alt?: string
   width?: number | `${number}`
   height?: number | `${number}`
+  className?: any
 }
 
 const myLoader = ({ src, width, quality }: any) => {

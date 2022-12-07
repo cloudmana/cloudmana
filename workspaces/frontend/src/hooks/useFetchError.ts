@@ -14,13 +14,8 @@ export default function useFetchError(error?: Error) {
 
     if ('isAxiosError' in error) {
       const axiosError = error as AxiosError
-      return (
-        // @ts-ignore
-        axiosError.response?.data?.message?.message?.toString() ||
-        // @ts-ignore
-        axiosError.response?.data?.message?.toString() ||
-        axiosError.toJSON()
-      )
+      const data: any = axiosError.response?.data
+      return data?.message?.message?.toString() || data?.message?.toString() || axiosError.toJSON()
     }
 
     return error.message

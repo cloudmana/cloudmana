@@ -12,8 +12,8 @@ import { authSlice } from './index'
 import { AppState } from '../index'
 import { AuthState, AuthStatus, User } from './types'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { DependencyList, useEffect, useMemo, useState } from 'react'
-import { ApplicationModal, setOpenModal } from '../application/actions'
+import { DependencyList, useEffect, useMemo } from 'react'
+import { setOpenModal } from '../application/actions'
 import { clientApi } from '../../utils/api'
 import { useSetPendingSwitchAcc } from '../application/hooks'
 import { ToastTypes, useToast } from 'src/components/ToastProvider'
@@ -27,7 +27,7 @@ export function useAuthFetch() {
   const token = useAppSelector((state: AppState) => state.auth.token)
   return useMemo(() => {
     return axios.create({
-      baseURL: env.SERVER_HOST,
+      baseURL: env.SERVER_API,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -40,11 +40,7 @@ export function useLogin() {
   const { status: authStatus, token } = useAuthState()
   const setPendingAcc = useSetPendingSwitchAcc()
   const { addToast } = useToast()
-  const updateNotifi = useUpdateNotification()
-
-  const openSignModal = () => {
-    dispatch(setOpenModal(ApplicationModal.SIGN_MSG))
-  }
+  const updateNotify: any = useUpdateNotification()
 
   const [{ loading, error }, login] = useAsyncFn(async () => {
     try {
@@ -53,8 +49,8 @@ export function useLogin() {
         data: { token },
       } = await axios.post<{
         token: string
-      }>(`${env.SERVER_HOST}api/v1/cloudmana/auth/login`, {
-        username: ''
+      }>(`${env.SERVER_API}/api/v1/cloudmana/auth/login`, {
+        username: '',
       })
 
       setPendingAcc(false)
@@ -65,8 +61,7 @@ export function useLogin() {
             token,
           }),
         )
-        updateNotifi()
-        window.gtag('event', 'login_click', {
+        updateNotify()(window as any).gtag('event', 'login_click', {
           event_label: 'Login',
           event_category: 'login_click',
         })
@@ -76,7 +71,7 @@ export function useLogin() {
       }
 
       dispatch(setOpenModal(null))
-    } catch (error) {
+    } catch (error: any) {
       if (error?.response && error?.response?.data?.message?.statusCode === 400) {
         addToast({ type: ToastTypes.ERROR, content: error.response.data.message.message })
       } else if (error.code === 4001) {
@@ -85,13 +80,11 @@ export function useLogin() {
         addToast({ type: ToastTypes.ERROR, content: 'Transaction has been failed!' })
       }
       dispatch(authSlice.actions.setNotLoggedIn(AuthStatus.DEACTIVATE))
-      deactivate()
       dispatch(setOpenModal(null))
     }
-  }, [dispatch,, authStatus, token])
+  }, [dispatch, authStatus, token])
 
   return {
-    openSignModal,
     login,
     loading,
     error,
@@ -100,6 +93,7 @@ export function useLogin() {
 
 export function useAutoFetchCurrentUser(dependencies: DependencyList = []) {
   const appDispatch = useAppDispatch()
+  const { token } = useAuthState()
 
   const [, fetchCurrentUser] = useAsyncFn(async () => {
     const { data: user } = await clientApi.get<User>('api/cloudmana/profile/me')

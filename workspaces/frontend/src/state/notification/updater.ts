@@ -10,22 +10,23 @@ import { io } from 'socket.io-client'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import env from 'src/config/env'
 import { useUpdateNotification } from './hooks'
+import { AppState } from '..'
 
 export default function Updater(): null {
   const dispatch = useAppDispatch()
 
   const token = useAppSelector((state: AppState) => state.auth.token)
-  const updateNotifi = useUpdateNotification()
+  const updateNotify: any = useUpdateNotification()
   useEffect(() => {
     if (token) {
-      const socket = io(env.API_SOCKET as string, {
+      const socket = io(env.SOCKET_API as string, {
         extraHeaders: {
           Authorization: `Bearer ${token}`,
         },
       })
       socket.on('connect', function () {
         socket.on('notification', (_data) => {
-          updateNotifi()
+          updateNotify()
         })
       })
       return () => {
@@ -33,6 +34,7 @@ export default function Updater(): null {
         socket.close()
       }
     }
+    return
   }, [dispatch, token])
 
   return null

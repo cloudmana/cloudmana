@@ -6,7 +6,8 @@
     "prettier",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@next/next/recommended"
   ],
   "rules": {
     // note you must disable the base rule as it can report incorrect errors
