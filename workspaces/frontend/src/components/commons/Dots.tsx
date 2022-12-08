@@ -15,18 +15,20 @@ interface DotsProps {
 
 export function Dots({ children = <span />, className }: DotsProps) {
   return (
-    <div className={twMerge('flex flex-col items-center', className)}>
-      <div className="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div className={twMerge('h-screen flex items-center justify-center', className)}>
+      <div className="flex flex-col">
+        <div className="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <span className="text-[#373C3E] text-center font-medium text-base mt-3">{children}</span>
       </div>
-      <span className="text-[#373C3E] font-medium text-base mt-3">{children}</span>
     </div>
   )
 }

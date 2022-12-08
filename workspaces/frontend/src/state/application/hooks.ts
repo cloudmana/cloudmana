@@ -7,6 +7,7 @@
 
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ThemeType } from 'src/models/theme'
 import { AppDispatch, AppState } from '../index'
 import {
   addPopup,
@@ -15,6 +16,7 @@ import {
   removePopup,
   setOpenModal,
   setPendingSwitchAcc,
+  setTheme,
 } from './actions'
 
 export function usePendingSwitchAcc(): number | undefined {
@@ -35,6 +37,15 @@ export function useToggleModal(modal: ApplicationModal): () => void {
   const open = useModalOpen(modal)
   const dispatch = useDispatch<AppDispatch>()
   return useCallback(() => dispatch(setOpenModal(open ? null : modal)), [dispatch, modal, open])
+}
+
+export function useToggleTheme(theme?: string): () => void {
+  const { theme: _theme } = useSelector((state: AppState) => state.application)
+  const dispatch = useDispatch<AppDispatch>()
+  return useCallback(
+    () => dispatch(setTheme(theme || (_theme == ThemeType.DARK ? ThemeType.LIGHT : ThemeType.DARK))),
+    [dispatch],
+  )
 }
 
 // returns a function that allows adding a popup

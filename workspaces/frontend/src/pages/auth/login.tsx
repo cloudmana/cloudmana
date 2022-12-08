@@ -15,10 +15,11 @@ import { Grid, Stack, Typography } from '@mui/material'
 import AuthLogin from 'src/modules/auth/auth-forms/AuthLogin'
 import AuthWrapper from 'src/modules/auth/AuthWrapper'
 import type { NextPageWithLayout } from 'src/pages/_app'
+import Loadable from 'src/components/Loadable'
 
 // ================================|| LOGIN ||================================ //
 
-const Login: NextPageWithLayout = () => (
+const Login: NextPageWithLayout = Loadable(() => (
   <AuthWrapper>
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -45,7 +46,7 @@ const Login: NextPageWithLayout = () => (
       </Grid>
     </Grid>
   </AuthWrapper>
-)
+))
 
 Login.getLayout = function getLayout(page: ReactElement) {
   return page

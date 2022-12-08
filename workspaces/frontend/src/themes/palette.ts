@@ -13,13 +13,12 @@ import { presetPalettes } from '@ant-design/colors'
 
 // project import
 import ThemeOption from './theme'
+import { ThemeType } from 'src/models/theme'
 
 // ==============================|| DEFAULT THEME - PALETTE  ||============================== //
 
-const Palette = (mode: any) => {
-  const colors = presetPalettes
-
-  const greyPrimary = [
+const greyLight = {
+  greyPrimary: [
     '#ffffff',
     '#fafafa',
     '#f5f5f5',
@@ -31,10 +30,32 @@ const Palette = (mode: any) => {
     '#262626',
     '#141414',
     '#000000',
-  ]
-  const greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f']
-  const greyConstant = ['#fafafb', '#e6ebf1']
+  ],
+  greyAscent: ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'],
+  greyConstant: ['#fafafb', '#e6ebf1'],
+}
 
+const greyDark = {
+  greyPrimary: [
+    '#1e1e1e',
+    '#141414',
+    '#121212',
+    'rgba(255, 255, 255, 0.05)',
+    'rgba(255, 255, 255, 0.23)',
+    '#bfbfbf',
+    '#8c8c8c',
+    '#595959',
+    '#ffffff',
+    '#141414',
+    '#ffffff',
+  ],
+  greyAscent: ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'],
+  greyConstant: ['#121212', 'rgb(255 255 255 / 5%)'],
+}
+
+const Palette = (mode: any) => {
+  const colors = presetPalettes
+  const { greyPrimary, greyAscent, greyConstant } = mode === ThemeType.LIGHT ? greyLight : greyDark
   colors.grey = [...greyPrimary, ...greyAscent, ...greyConstant]
 
   const paletteColor = ThemeOption(colors)

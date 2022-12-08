@@ -5,4 +5,9 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-export { default } from 'src/modules/extra-pages/SamplePage'
+import { lazy } from 'react'
+import Loadable from 'src/components/Loadable'
+
+const SamplePage = Loadable(lazy(() => import('src/modules/extra-pages/SamplePage')))
+
+export default SamplePage

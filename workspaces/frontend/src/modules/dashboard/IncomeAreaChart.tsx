@@ -13,6 +13,7 @@ import { useTheme } from '@mui/material/styles'
 
 // third-party
 import ReactApexChart from 'react-apexcharts'
+import { ThemeType } from 'src/models/theme'
 
 // chart options
 const areaChartOptions: any = {
@@ -89,7 +90,7 @@ const IncomeAreaChart = ({ slot }: any) => {
         borderColor: line,
       },
       tooltip: {
-        theme: 'light',
+        theme: theme.palette.mode,
       },
     }))
   }, [primary, secondary, line, theme, slot])

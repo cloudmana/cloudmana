@@ -15,10 +15,11 @@ import { Grid, Stack, Typography } from '@mui/material'
 import FirebaseRegister from 'src/modules/auth/auth-forms/AuthRegister'
 import AuthWrapper from 'src/modules/auth/AuthWrapper'
 import type { NextPageWithLayout } from 'src/pages/_app'
+import Loadable from 'src/components/Loadable'
 
 // ================================|| REGISTER ||================================ //
 
-const Register: NextPageWithLayout = () => (
+const Register: NextPageWithLayout = Loadable(() => (
   <AuthWrapper>
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -45,7 +46,7 @@ const Register: NextPageWithLayout = () => (
       </Grid>
     </Grid>
   </AuthWrapper>
-)
+))
 
 Register.getLayout = function getLayout(page: ReactElement) {
   return page

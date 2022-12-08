@@ -5,4 +5,9 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-export { default } from 'src/modules/dashboard'
+import { lazy } from 'react'
+import Loadable from 'src/components/Loadable'
+
+const DashboardDefault = Loadable(lazy(() => import('src/modules/dashboard')))
+
+export default DashboardDefault

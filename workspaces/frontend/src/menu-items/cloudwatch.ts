@@ -25,7 +25,7 @@ const cloudwatch = {
       id: 'cloudwatch-overview',
       title: 'Overview',
       type: 'collapse',
-      url: '/typography',
+      url: '',
       icon: icons.LoginOutlined,
       children: [
         {

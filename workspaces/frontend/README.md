@@ -26,13 +26,13 @@ yarn install
 
 ```bash
 # development
-yarn start
+yarn dev
 
 # build
 yarn build
 
 # production mode
-yarn start:prod
+yarn start
 ```
 
 ## Support

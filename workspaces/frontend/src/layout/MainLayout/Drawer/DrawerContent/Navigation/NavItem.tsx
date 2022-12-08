@@ -90,7 +90,6 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
   const iconSelectedColor = 'primary.main'
 
   const onClickHandler = () => {
-    console.log('##################', item)
     if (item.type === 'collapse') {
       setOpen(!open)
       setOpenCollapse(!openCollapse)
@@ -135,15 +134,15 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
           py: !drawerOpen && level === 1 ? 1.25 : 1,
           ...(drawerOpen && {
             '&:hover': {
-              bgcolor: 'primary.lighter',
+              // bgcolor: 'primary.lighter',
             },
             '&.Mui-selected': {
-              bgcolor: 'primary.lighter',
+              // bgcolor: 'primary.lighter',
               borderRight: `2px solid ${theme.palette.primary.main}`,
               color: iconSelectedColor,
               '&:hover': {
                 color: iconSelectedColor,
-                bgcolor: 'primary.lighter',
+                // bgcolor: 'primary.lighter',
               },
             },
           }),
