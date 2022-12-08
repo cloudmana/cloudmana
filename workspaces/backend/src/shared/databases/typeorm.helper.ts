@@ -8,6 +8,7 @@
 import config from 'src/common/config'
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
+import { TypeormLogger } from 'src/shared/logger.helper'
 
 export class TypeOrmModuleConfigService implements TypeOrmOptionsFactory {
   constructor(
@@ -23,6 +24,8 @@ export class TypeOrmModuleConfigService implements TypeOrmOptionsFactory {
       database: dbConfig.database,
       url: dbConfig.uri,
       autoLoadEntities: true,
+      logging: config.nodeEnv !== 'production',
+      logger: new TypeormLogger(),
     }
   }
 

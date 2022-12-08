@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { UserRepository } from '../user/user.repository'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 import config from 'src/common/config'
@@ -11,15 +10,13 @@ import { RefreshTokenDto } from './dto/refresh-token.dto'
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @InjectRepository(User)
-    private repository: Repository<User>,
-    private jwt: JwtService,
-  ) {}
+  constructor(private repository: UserRepository, private jwt: JwtService) {}
 
   async signup(user: UserSignupDto): Promise<User> {
     const userCheck = await this.repository.findOne({
-      where: [{ username: user.username }, { email: user.email }],
+      where: {
+        $or: [{ username: user.username }, { email: user.email }],
+      },
     })
     if (userCheck) {
       throw new BadRequestException('Username or email already existed')
@@ -28,9 +25,7 @@ export class AuthService {
     const salt = await bcrypt.genSalt()
     const hash = await bcrypt.hash(user.password, salt)
     user.password = hash
-    const _user = new User(user)
-    _user.id = null
-    return await this.repository.save(_user)
+    return await this.repository.save(new User(user))
   }
 
   async login(user: any) {
@@ -75,7 +70,7 @@ export class AuthService {
 
   async validateUser(account: string, password: string): Promise<any> {
     const foundUser = await this.repository.findOne({
-      where: [{ username: account }, { email: account }],
+      where: { $or: [{ username: account }, { email: account }] },
     })
 
     if (!foundUser) {

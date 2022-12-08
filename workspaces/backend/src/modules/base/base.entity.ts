@@ -1,11 +1,10 @@
 import {
   BaseEntity as _BaseEntity,
   CreateDateColumn,
-  ObjectIdColumn,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { ObjectId } from 'mongodb'
+import { PrimaryColumn } from './decorator/base.decorator'
 
 export class BaseEntity<T> extends _BaseEntity {
   constructor(partial?: Partial<T>) {
@@ -13,8 +12,7 @@ export class BaseEntity<T> extends _BaseEntity {
     Object.assign(this, partial || {})
   }
 
-  @ObjectIdColumn({ type: 'varchar' })
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number | ObjectId
 
   @CreateDateColumn({

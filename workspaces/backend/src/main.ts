@@ -20,10 +20,14 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, {
     cors: true,
+    bufferLogs: true,
   })
+
+  // logging
   const logger = app.get(Logger)
   app.useLogger(logger)
 
+  // initialize
   await initializeApp(app)
   await initializeSwagger(app)
 
@@ -32,10 +36,11 @@ async function bootstrap() {
 
   const lightship = await initializeLightship(app)
   await app.listen(config.port, () => {
-    logger.log(`Using env ${process.env.NODE_ENV},${config.nodeEnv}`)
+    const { swagger } = config
+    logger.log(`Using env env:${process.env.NODE_ENV} config:${config.nodeEnv}`)
     logger.log(`Server running on http://${config.host}:${config.port}${config.baseUrl}`)
+    logger.log(`Access swagger at ${swagger.schema}://${swagger.hostname}${swagger.baseUrl}`)
   })
-
   lightship.signalReady()
 }
 

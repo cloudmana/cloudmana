@@ -1,0 +1,7 @@
+node_env: 'production'
+
+auth:
+  swagger:
+    enable: false
+    username: cloudmana
+    password: cloudmana

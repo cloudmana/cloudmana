@@ -34,6 +34,7 @@ export class Config {
     return {
       version: this.getString('server.api.version'),
       schema: this.getString('server.swagger.schema'),
+      hostname: this.getString('server.swagger.hostname'),
       baseUrl: this.getString('server.swagger.baseUrl'),
       auth: {
         enable: this.getBoolean('auth.swagger.enable'),
