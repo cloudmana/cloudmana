@@ -12,7 +12,6 @@ import { useTheme } from '@mui/material/styles'
 
 // third-party
 import ReactApexChart from 'react-apexcharts'
-import { ThemeType } from 'src/models/theme'
 
 // chart options
 const barChartOptions: any = {

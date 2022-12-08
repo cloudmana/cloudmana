@@ -22,7 +22,7 @@ import storage from 'src/config/storage'
 
 let store: any
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', 'auth']
+const PERSISTED_KEYS: string[] = ['menu', 'application', 'user', 'transactions', 'lists', 'auth']
 
 const persistConfig = {
   key: 'root',

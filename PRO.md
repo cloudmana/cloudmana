@@ -1,6 +1,6 @@
 # Cloudmana Pro
 
-This is the open source project, so everything at here is free with MIT license. There will be only a PRO, and that's you. You can become like as PRO by sponsor this project.
+This is the open source project, so everything at here is free with MIT license. There will be only a PRO, and that's you. You can become like a PRO by sponsor this project.
 
 Thank you for using this project, from Cloudmana's author - on behalf of the Cloudmana team ❤️
 

@@ -8,6 +8,6 @@
 import { lazy } from 'react'
 import Loadable from 'src/components/Loadable'
 
-const DashboardTemplate = Loadable(lazy(() => import('src/modules/dashboard/template')))
+const Welcome = Loadable(lazy(() => import('src/modules/welcome')))
 
-export default DashboardTemplate
+export default Welcome

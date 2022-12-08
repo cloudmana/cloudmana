@@ -6,33 +6,34 @@
  */
 
 // assets
-import { DashboardOutlined } from '@ant-design/icons'
+import { DashboardOutlined, HomeOutlined } from '@ant-design/icons'
 
 // icons
 const icons = {
   DashboardOutlined,
+  HomeOutlined,
 }
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
 const dashboard = {
   id: 'group-dashboard',
-  title: 'Navigation',
+  // title: 'Navigation',
   type: 'group',
   children: [
+    {
+      id: 'welcome',
+      title: 'Welcome',
+      type: 'item',
+      url: '/welcome',
+      icon: icons.HomeOutlined,
+      breadcrumbs: false,
+    },
     {
       id: 'dashboard',
       title: 'Dashboard',
       type: 'item',
       url: '/dashboard',
-      icon: icons.DashboardOutlined,
-      breadcrumbs: false,
-    },
-    {
-      id: 'dashboard-template',
-      title: 'Template',
-      type: 'item',
-      url: '/dashboard/template',
       icon: icons.DashboardOutlined,
       breadcrumbs: false,
     },

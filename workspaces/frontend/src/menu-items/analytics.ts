@@ -6,13 +6,7 @@
  */
 
 // assets
-import { LoginOutlined, ProfileOutlined } from '@ant-design/icons'
-
-// icons
-const icons = {
-  LoginOutlined,
-  ProfileOutlined,
-}
+import { AreaChartOutlined, SecurityScanOutlined } from '@ant-design/icons'
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
@@ -22,18 +16,17 @@ const analytics = {
   type: 'group',
   children: [
     {
-      id: 'analytics-overview',
+      id: 'cloudwatch-overview',
       title: 'Overview',
       type: 'item',
-      url: '/typography',
-      icon: icons.LoginOutlined,
+      icon: AreaChartOutlined,
     },
     {
       id: 'analytics-security',
       title: 'Security',
       type: 'item',
       url: '/shadow',
-      icon: icons.ProfileOutlined,
+      icon: SecurityScanOutlined,
     },
   ],
 }

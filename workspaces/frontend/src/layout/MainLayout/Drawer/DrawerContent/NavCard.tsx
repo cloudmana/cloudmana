@@ -39,7 +39,7 @@ const NavCard = () => {
           <Button
             component={Link}
             target="_blank"
-            href="https://github.com/cloudmana/cloudmana"
+            href="https://github.com/cloudmana/cloudmana/blob/develop/PRO.md"
             variant="contained"
             color="success"
             size="small"

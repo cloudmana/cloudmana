@@ -51,7 +51,7 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
 
   let listItemProps: any = {
     component: forwardRef((props: any, ref: any) => (
-      <Link ref={ref} {...props} href={item.url} target={itemTarget} />
+      <Link ref={ref} {...props} href={item.url || ''} target={itemTarget} />
     )),
   }
   if (item?.external) {

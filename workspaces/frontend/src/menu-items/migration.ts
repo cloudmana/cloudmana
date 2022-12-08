@@ -6,12 +6,14 @@
  */
 
 // assets
-import { LoginOutlined, ProfileOutlined } from '@ant-design/icons'
+import { LoginOutlined, ProfileOutlined, UserSwitchOutlined, CloudSyncOutlined } from '@ant-design/icons'
 
 // icons
 const icons = {
   LoginOutlined,
   ProfileOutlined,
+  UserSwitchOutlined,
+  CloudSyncOutlined,
 }
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -23,17 +25,17 @@ const migration = {
   children: [
     {
       id: 'migrate-to-other-account',
-      title: 'Account',
+      title: 'Accounts',
       type: 'item',
       url: '/typography', //'/migrate/other-account',
-      icon: icons.LoginOutlined,
+      icon: icons.UserSwitchOutlined,
     },
     {
       id: 'migrate-to-other-cloud-provider',
-      title: 'Cloud Provider',
+      title: 'Providers',
       type: 'item',
       url: '/shadow', //'/migrate/other-cloud-provider',
-      icon: icons.ProfileOutlined,
+      icon: icons.CloudSyncOutlined,
     },
   ],
 }

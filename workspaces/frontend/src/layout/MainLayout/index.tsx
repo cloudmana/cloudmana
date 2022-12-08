@@ -6,8 +6,8 @@
  */
 
 import { useEffect, useState } from 'react'
-// import { Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // material-ui
 import { useTheme } from '@mui/material/styles'
@@ -21,6 +21,7 @@ import Breadcrumbs from 'src/components/@extended/Breadcrumbs'
 
 // types
 import { openDrawer } from 'src/state/menu/actions'
+import { RootState } from 'src/state/reducer'
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -28,8 +29,10 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
   const theme = useTheme()
   const matchDownLG = useMediaQuery(theme.breakpoints.down('xl'))
   const dispatch = useDispatch()
+  const router = useRouter()
 
-  const { drawerOpen } = useSelector((state: any) => state.menu)
+  const { drawerOpen } = useSelector((state: RootState) => state.menu)
+  const { token } = useSelector((state: RootState) => state.auth)
 
   // drawer toggler
   const [open, setOpen] = useState(drawerOpen)
@@ -37,6 +40,12 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
     setOpen(!open)
     dispatch(openDrawer(!open))
   }
+
+  useEffect(() => {
+    if (!token) {
+      router.replace('/auth/login')
+    }
+  }, [token])
 
   // set media wise responsive drawer
   useEffect(() => {
