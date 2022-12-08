@@ -5,19 +5,33 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-// import { LinkButton } from '../Buttons/link-button'
+import { Button, Typography } from '@mui/material'
+import AnimateButton from 'src/components/@extended/AnimateButton'
 
 export default function PageNotFound() {
   return (
-    <div className="not-found-page">
+    <div className="not-found-page h-full">
       <div className="flex flex-col items-center">
         <p className="text-primary text-[120px] font-semibold">404</p>
-        <p className="text-secondary text-2xl lg:text-5xl font-semibold mb-4">Page Not Found</p>
-        <p className="text-[#636366] text-lg font-bold max-w-[542px] text-center mb-8">
+        <Typography variant="h1" textAlign={'center'}>
+          Page Not Found
+        </Typography>
+        <Typography variant="h5" textAlign={'center'} color="secondary" margin="30px">
           We've explored deep and wide, <br /> but we can't find the page you were looking for.
-        </p>
+        </Typography>
         <div className="max-w-[255px]">
-          {/* <LinkButton url="/" label="Navigate back home" isNewTab={false} /> */}
+          <AnimateButton>
+            <Button
+              disableElevation
+              href="/"
+              size="large"
+              type="submit"
+              variant="contained"
+              color="secondary"
+            >
+              Navigate back home
+            </Button>
+          </AnimateButton>
         </div>
       </div>
     </div>

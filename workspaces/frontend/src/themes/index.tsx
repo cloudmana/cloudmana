@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 
 // material-ui
 import { CssBaseline, StyledEngineProvider } from '@mui/material'
@@ -17,11 +18,13 @@ import Palette from './palette'
 import Typography from './typography'
 import CustomShadows from './shadows'
 import componentsOverride from './overrides'
+import { ThemeType } from 'src/models/theme'
 
 // ==============================|| DEFAULT THEME - MAIN  ||============================== //
 
 export default function ThemeCustomization({ children }: any) {
-  const theme = Palette('light')
+  const _theme = useSelector((state: any) => state.application.theme)
+  const theme = Palette(_theme || ThemeType.LIGHT)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const themeTypography = Typography('"Public Sans", sans-serif')

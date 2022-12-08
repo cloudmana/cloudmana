@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles'
 
 // third-party
 import ReactApexChart from 'react-apexcharts'
+import { ThemeType } from 'src/models/theme'
 
 // chart options
 const columnChartOptions: any = {
@@ -133,7 +134,7 @@ const SalesColumnChart = () => {
         borderColor: line,
       },
       tooltip: {
-        theme: 'light',
+        theme: theme.palette.mode,
       },
       legend: {
         position: 'top',

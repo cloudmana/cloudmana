@@ -8,6 +8,6 @@
 import { lazy } from 'react'
 import Loadable from 'src/components/Loadable'
 
-const Typography = Loadable(lazy(() => import('src/modules/components-overview/Typography')))
+const DashboardTemplate = Loadable(lazy(() => import('src/modules/dashboard/template')))
 
-export default Typography
+export default DashboardTemplate

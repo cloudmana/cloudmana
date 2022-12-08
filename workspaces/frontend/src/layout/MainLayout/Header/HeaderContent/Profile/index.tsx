@@ -34,6 +34,7 @@ import SettingTab from './SettingTab'
 // assets
 import avatar1 from 'src/assets/images/users/avatar-1.png'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { ThemeType } from 'src/models/theme'
 
 export interface TabPanelProps {
   index: any
@@ -136,7 +137,7 @@ const Profile = () => {
             {open && (
               <Paper
                 sx={{
-                  boxShadow: theme.customShadows.z1,
+                  boxShadow: theme.palette.mode === ThemeType.LIGHT ? theme.customShadows.z1 : undefined,
                   width: 290,
                   minWidth: 240,
                   maxWidth: 290,

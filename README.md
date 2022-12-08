@@ -25,7 +25,7 @@ yarn start:app
 yarn start:api
 
 # watch mode
-yarn app start
+yarn app dev
 yarn api start:dev
 
 # build
@@ -33,7 +33,7 @@ yarn app build
 yarn api build
 
 # production mode
-yarn app start:prod
+yarn app start
 yarn api start:prod
 ```
 
@@ -46,7 +46,7 @@ yarn api start:prod
   - WebSocket supported with socket.io
   - Redis as cache
 - Frontend:
-  - ReactJS
+  - NextJS
 
 ## Development:
 

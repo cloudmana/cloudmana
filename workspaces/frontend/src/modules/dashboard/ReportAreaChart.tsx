@@ -98,7 +98,7 @@ const ReportAreaChart = () => {
         borderColor: line,
       },
       tooltip: {
-        theme: 'light',
+        theme: theme.palette.mode,
       },
       legend: {
         labels: {

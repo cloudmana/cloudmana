@@ -43,7 +43,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=screen-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+        />
         <title>Cloudmana</title>
         <link rel="icon" href="/assets/images/logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -28,6 +28,14 @@ const dashboard = {
       icon: icons.DashboardOutlined,
       breadcrumbs: false,
     },
+    {
+      id: 'dashboard-template',
+      title: 'Template',
+      type: 'item',
+      url: '/dashboard/template',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false,
+    },
   ],
 }
 

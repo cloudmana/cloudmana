@@ -5,7 +5,6 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import PropTypes from 'prop-types'
 import { forwardRef } from 'react'
 
 // material-ui
@@ -14,6 +13,7 @@ import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/materia
 
 // project import
 import Highlighter from './third-party/Highlighter'
+import { ThemeType } from 'src/models/theme'
 
 // header style
 const headerSX = {
@@ -22,6 +22,22 @@ const headerSX = {
 }
 
 // ==============================|| CUSTOM - MAIN CARD ||============================== //
+
+export interface MainCardProps {
+  border: boolean
+  boxShadow: boolean
+  contentSX: any
+  darkTitle: boolean
+  divider: boolean
+  elevation: number
+  secondary: React.ReactNode
+  shadow: string
+  sx: any
+  title: string | React.ReactNode
+  codeHighlight: boolean
+  content: boolean
+  children: React.ReactNode
+}
 
 const MainCard: any = forwardRef(
   (
@@ -40,11 +56,11 @@ const MainCard: any = forwardRef(
       title,
       codeHighlight,
       ...others
-    }: any,
-    ref,
+    }: MainCardProps,
+    ref: any,
   ) => {
     const theme = useTheme<any>()
-    boxShadow = theme.palette.mode === 'dark' ? boxShadow || true : boxShadow
+    // boxShadow = theme.palette.mode === ThemeType.DARK ? boxShadow || true : boxShadow
 
     return (
       <Card
@@ -56,13 +72,13 @@ const MainCard: any = forwardRef(
           border: border ? '1px solid' : 'none',
           borderRadius: 2,
           borderColor:
-            theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800,
+            theme.palette.mode === ThemeType.DARK ? theme.palette.divider : theme.palette.grey.A800,
           boxShadow:
-            boxShadow && (!border || theme.palette.mode === 'dark')
+            sx.boxShadow && (!border || theme.palette.mode === ThemeType.DARK)
               ? shadow || theme.customShadows.z1
               : 'inherit',
           ':hover': {
-            boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'inherit',
+            boxShadow: sx.boxShadow ? shadow || theme.customShadows.z1 : 'inherit',
           },
           '& pre': {
             m: 0,
@@ -109,21 +125,5 @@ const MainCard: any = forwardRef(
     )
   },
 )
-
-MainCard.propTypes = {
-  border: PropTypes.bool,
-  boxShadow: PropTypes.bool,
-  contentSX: PropTypes.object,
-  darkTitle: PropTypes.bool,
-  divider: PropTypes.bool,
-  elevation: PropTypes.number,
-  secondary: PropTypes.node,
-  shadow: PropTypes.string,
-  sx: PropTypes.object,
-  title: PropTypes.string,
-  codeHighlight: PropTypes.bool,
-  content: PropTypes.bool,
-  children: PropTypes.node,
-}
 
 export default MainCard

@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles'
 
 // third-party
 import ReactApexChart from 'react-apexcharts'
+import { ThemeType } from 'src/models/theme'
 
 // chart options
 const barChartOptions: any = {
@@ -76,7 +77,7 @@ const MonthlyBarChart = () => {
         },
       },
       tooltip: {
-        theme: 'light',
+        theme: theme.palette.mode,
       },
     }))
     // eslint-disable-next-line react-hooks/exhaustive-deps

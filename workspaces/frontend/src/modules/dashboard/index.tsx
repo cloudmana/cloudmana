@@ -18,8 +18,14 @@ const DashboardDefault = () => {
         <Typography variant="h5">Dashboard</Typography>
       </Grid>
       <Grid item xs={12} textAlign={'center'}>
-        <Typography variant="h1" textAlign={'center'}>
-          ☄️☄️☄️ Welcome to Cloudmana ☄️☄️☄️
+        <Typography variant="h2" textAlign={'center'}>
+          ☄️🧰☄️
+        </Typography>
+        <Typography variant="h2" textAlign={'center'}>
+          Welcome to Cloudmana
+        </Typography>
+        <Typography variant="h2" textAlign={'center'}>
+          ☄️💊☄️
         </Typography>
       </Grid>
     </Grid>

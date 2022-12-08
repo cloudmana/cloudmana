@@ -39,6 +39,7 @@ import {
   MessageOutlined,
   SettingOutlined,
 } from '@ant-design/icons'
+import { ThemeType } from 'src/models/theme'
 
 // sx styles
 const avatarSX = {
@@ -117,7 +118,7 @@ const Notification = () => {
           <Transitions type="fade" in={open} {...TransitionProps}>
             <Paper
               sx={{
-                boxShadow: theme.customShadows.z1,
+                boxShadow: theme.palette.mode === ThemeType.LIGHT ? theme.customShadows.z1 : undefined,
                 width: '100%',
                 minWidth: 285,
                 maxWidth: 420,

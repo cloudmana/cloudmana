@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "start:app": "yarn app start",
+    "start:app": "yarn app dev",
     "start:api": "yarn api start",
     "format": "yarn app format && yarn api format",
     "lint": "yarn app lint && yarn api lint",

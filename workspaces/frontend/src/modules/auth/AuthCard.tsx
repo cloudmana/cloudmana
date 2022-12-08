@@ -12,6 +12,7 @@ import { Box } from '@mui/material'
 
 // project import
 import MainCard from 'src/components/MainCard'
+import { ThemeType } from 'src/models/theme'
 
 // ==============================|| AUTHENTICATION - CARD WRAPPER ||============================== //
 
@@ -29,7 +30,9 @@ const AuthCard = ({ children, ...other }: any) => (
     {...other}
     border={false}
     boxShadow
-    shadow={(theme: any) => theme.customShadows.z1}
+    shadow={(theme: any) =>
+      theme.palette.mode === ThemeType.LIGHT ? theme.customShadows.z1 : undefined
+    }
   >
     <Box sx={{ p: { xs: 2, sm: 3, md: 4, xl: 5 } }}>{children}</Box>
   </MainCard>

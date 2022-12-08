@@ -1,9 +1,8 @@
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
 body {
-  color: #373c3e;
   overflow-x: hidden;
 }
 
@@ -309,6 +308,24 @@ body {
 .contain-lg {
   max-width: 1100px;
 }
+
+/* [type='text'],
+[type='email'],
+[type='url'],
+[type='password'],
+[type='number'],
+[type='date'],
+[type='datetime-local'],
+[type='month'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='week'],
+[multiple],
+textarea,
+select {
+  background-color: inherit;
+} */
 
 .dark .form-input-group input:focus {
   border: 1px solid #f8b900 !important;
@@ -687,7 +704,7 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #ce0b39;
+  background: #008cff;
   margin: -4px 0 0 -4px;
 }
 
@@ -933,16 +950,8 @@ body {
 
 .not-found-page {
   background-image: url('/images/banner-404.png');
-  height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.not-found-page > div {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 50%;
 }
 
 .filter {

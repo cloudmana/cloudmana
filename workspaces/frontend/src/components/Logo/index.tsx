@@ -10,18 +10,21 @@ import Link from 'next/link'
 import { ButtonBase } from '@mui/material'
 // project import
 import Logo from './Logo'
+import LogoSmall from './LogoSmall'
 import config from 'src/config'
 
 // ==============================|| MAIN LOGO ||============================== //
 
 export interface LogoSectionProps {
+  src?: string
+  size?: 'normal' | 'small'
   sx?: any
   to?: string
 }
 
-const LogoSection = ({ sx, to }: LogoSectionProps) => (
+const LogoSection = ({ src, size = 'normal', sx, to }: LogoSectionProps) => (
   <ButtonBase disableRipple component={Link} href={!to ? config.defaultPath : to} sx={sx}>
-    <Logo />
+    {size === 'normal' ? <Logo src={src} /> : <LogoSmall />}
   </ButtonBase>
 )
 
