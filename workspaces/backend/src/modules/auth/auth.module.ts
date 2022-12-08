@@ -9,6 +9,7 @@ import { LocalStrategy } from './strategy/local.strategy'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import config from 'src/common/config'
 import { User } from '../user/user.entity'
+import { UserRepository } from '../user/user.repository'
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { User } from '../user/user.entity'
     }),
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy, UserRepository],
   controllers: [AuthController],
 })
 export class AuthModule {}
