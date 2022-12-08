@@ -1,9 +1,9 @@
 <p align="center">
   <a href="http://thinhhv.com/cloudmana" target="blank">
-    <img style="width: 150px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
+    <img style="width: 350px;" src="../frontend/public/assets/images/cloudmana.svg" alt="Cloudmana landing page" />
   </a>
 </p>
-<p align="center">A dashboard for manage multi-cloud resources.</p>
+<p align="center">A dashboard for manage resources on cloud, support multi-providers.</p>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
   <a href="https://github.com/cloudmana/cloudmana/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price" /></a>

@@ -1,18 +1,15 @@
 <p align="center">
   <a href="http://thinhhv.com/cloudmana" target="blank">
-    <img style="width: 150px;" src="https://cloudmana.github.io/public/assets/images/logo.png?raw=true" alt="Cloudmana landing page" />
+    <img style="width: 350px;" src="public/assets/images/cloudmana.svg" alt="Cloudmana landing page" />
   </a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A dashboard for manage multi-cloud resources.</p>
-  <p align="center">
-    <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-    <a href="https://github.com/cloudmana/cloudmana/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price" /></a>
-    <a href="https://github.com/cloudmana/cloudmana/" target="_blank"><img src="https://img.shields.io/github/package-json/v/cloudmana/cloudmana" alt="GitHub package version" /></a>
-  </p>
+<p align="center">A dashboard for manage resources on cloud, support multi-providers.</p>
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <a href="https://github.com/cloudmana/cloudmana/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price" /></a>
+  <a href="https://github.com/cloudmana/cloudmana/" target="_blank"><img src="https://img.shields.io/github/package-json/v/cloudmana/cloudmana" alt="GitHub package version" /></a>
+</p>
 
 # Cloudmana Frontend
 
