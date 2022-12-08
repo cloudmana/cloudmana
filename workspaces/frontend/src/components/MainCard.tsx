@@ -43,7 +43,7 @@ const MainCard: any = forwardRef(
   (
     {
       border = true,
-      boxShadow,
+      // boxShadow,
       children,
       content = true,
       contentSX = {},

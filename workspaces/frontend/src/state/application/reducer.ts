@@ -42,7 +42,7 @@ export interface ApplicationState {
 }
 
 const initialState: ApplicationState = {
-  theme: ThemeType.DARK,
+  theme: ThemeType.LIGHT,
   popupList: [],
   openModal: null,
   step: '0',

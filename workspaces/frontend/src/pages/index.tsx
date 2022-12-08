@@ -5,8 +5,8 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import Dashboard from '../modules/dashboard'
+import Welcome from '../modules/welcome'
 
 export default function HomePage() {
-  return <Dashboard />
+  return <Welcome />
 }

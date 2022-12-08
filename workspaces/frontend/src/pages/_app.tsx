@@ -21,6 +21,15 @@ import ScrollTop from 'src/components/ScrollTop'
 import MainLayout from 'src/layout/MainLayout'
 import { Dots } from 'src/components/commons/Dots'
 import { SnackbarProvider } from 'notistack'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10000,
+    },
+  },
+})
 
 setupAuthInterceptor(store)
 
@@ -83,15 +92,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         {/* <!-- Meta Tags Generated via https://www.opengraph.xyz --> */}
       </Head>
 
-      <ReduxProvider store={store}>
-        <PersistGate loading={<Dots>Loading</Dots>} persistor={persistor}>
-          <ThemeCustomization>
-            <SnackbarProvider maxSnack={3}>
-              <ScrollTop>{getLayout(<Component {...pageProps} />)}</ScrollTop>
-            </SnackbarProvider>
-          </ThemeCustomization>
-        </PersistGate>
-      </ReduxProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReduxProvider store={store}>
+          <PersistGate loading={<Dots>Loading</Dots>} persistor={persistor}>
+            <ThemeCustomization>
+              <SnackbarProvider maxSnack={3}>
+                <ScrollTop>{getLayout(<Component {...pageProps} />)}</ScrollTop>
+              </SnackbarProvider>
+            </ThemeCustomization>
+          </PersistGate>
+        </ReduxProvider>
+      </QueryClientProvider>
     </>
   )
 }

@@ -5,9 +5,17 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { VariantType, useSnackbar } from 'notistack'
+import { VariantType, useSnackbar, SnackbarKey } from 'notistack'
 
-export type StatusType = 'success' | 'error'
+export type StatusType = VariantType
+
+export enum ToastTypes {
+  DEFAULT = 'default',
+  ERROR = 'error',
+  SUCCESS = 'success',
+  WARNING = 'warning',
+  INFO = 'info',
+}
 
 export type MessageType = {
   title: string
@@ -16,20 +24,11 @@ export type MessageType = {
   position: string
 }
 
-export function useToastMessage() {
+export function useToastMessage(): [((status: StatusType, message: string) => SnackbarKey)] {
   const { enqueueSnackbar } = useSnackbar()
-  const notify: any = {
-    ['success']: {
-      title: 'Success',
-      description: 'Transaction has been performed successfully!',
-      status: 'success',
-      position: 'top-right',
-      className: 'max-w-[320px] sm:max-w-[380px]',
-    },
-  }
 
-  const showNotify = (status: VariantType) =>
-    enqueueSnackbar(notify[status].description, {
+  const showNotify = (status: StatusType, message: string) =>
+    enqueueSnackbar(message, {
       variant: status,
       anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
     })
@@ -55,6 +54,6 @@ export const authState: Partial<Record<StatusType, MessageType>> = {
 export function useAuthToastMessage() {
   const { enqueueSnackbar } = useSnackbar()
   const showMessage = (status: StatusType) =>
-    enqueueSnackbar(authState[status]?.description, { variant: status as VariantType })
+    enqueueSnackbar(authState[status]?.description, { variant: status as StatusType })
   return { showMessage }
 }

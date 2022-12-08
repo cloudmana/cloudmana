@@ -7,17 +7,16 @@
 
 // project import
 import migration from './migration'
-import pages from './pages'
 import dashboard from './dashboard'
 import utilities from './utilities'
 import support from './support'
-import cloudwatch from './cloudwatch'
 import analytics from './analytics'
+import services from './services'
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, migration, pages, utilities, cloudwatch, analytics, support],
+  items: [dashboard, services, utilities, migration, analytics, support],
 }
 
 export default menuItems

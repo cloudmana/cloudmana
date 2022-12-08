@@ -5,7 +5,9 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 // material-ui
@@ -16,37 +18,49 @@ import AuthLogin from 'src/modules/auth/auth-forms/AuthLogin'
 import AuthWrapper from 'src/modules/auth/AuthWrapper'
 import type { NextPageWithLayout } from 'src/pages/_app'
 import Loadable from 'src/components/Loadable'
+import { RootState } from 'src/state/reducer'
 
 // ================================|| LOGIN ||================================ //
 
-const Login: NextPageWithLayout = Loadable(() => (
-  <AuthWrapper>
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="baseline"
-          sx={{ mb: { xs: -0.5, sm: 0.5 } }}
-        >
-          <Typography variant="h3">Login</Typography>
-          <Typography
-            component={Link}
-            href="/auth/register"
-            variant="body1"
-            sx={{ textDecoration: 'none' }}
-            color="primary"
+const Login: NextPageWithLayout = Loadable(() => {
+  const router = useRouter()
+  const { token } = useSelector((state: RootState) => state.auth)
+
+  useEffect(() => {
+    if (token) {
+      router.replace('/')
+    }
+  }, [token])
+
+  return (
+    <AuthWrapper>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="baseline"
+            sx={{ mb: { xs: -0.5, sm: 0.5 } }}
           >
-            Don&apos;t have an account?
-          </Typography>
-        </Stack>
+            <Typography variant="h3">Login</Typography>
+            <Typography
+              component={Link}
+              href="/auth/register"
+              variant="body1"
+              sx={{ textDecoration: 'none' }}
+              color="primary"
+            >
+              Don&apos;t have an account?
+            </Typography>
+          </Stack>
+        </Grid>
+        <Grid item xs={12}>
+          <AuthLogin />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <AuthLogin />
-      </Grid>
-    </Grid>
-  </AuthWrapper>
-))
+    </AuthWrapper>
+  )
+})
 
 Login.getLayout = function getLayout(page: ReactElement) {
   return page

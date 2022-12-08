@@ -7,6 +7,7 @@
 
 import React from 'react'
 import RouterLink from 'next/link'
+import { useRouter } from 'next/router'
 
 // material-ui
 import {
@@ -32,16 +33,20 @@ import { Formik } from 'formik'
 // project import
 import FirebaseSocial from './FirebaseSocial'
 import AnimateButton from 'src/components/@extended/AnimateButton'
+import { useLogin } from 'src/state/auth/hooks'
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
+import Image from 'src/components/Image'
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
   const [checked, setChecked] = React.useState(false)
-
   const [showPassword, setShowPassword] = React.useState(false)
+  const { loading, login } = useLogin()
+  const router = useRouter()
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
@@ -66,6 +71,11 @@ const AuthLogin = () => {
           try {
             setStatus({ success: false })
             setSubmitting(false)
+            const logged = await login({
+              account: _values.account,
+              password: _values.password,
+            })
+            if (logged) router.push('/')
           } catch (err: any) {
             setStatus({ success: false })
             setErrors({ submit: err.message })
@@ -78,7 +88,7 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="account-login">Username / Email</InputLabel>
+                  <InputLabel htmlFor="account-login">Account</InputLabel>
                   <OutlinedInput
                     id="account-login"
                     type="account"
@@ -173,6 +183,13 @@ const AuthLogin = () => {
                     color="primary"
                   >
                     Login
+                    {loading && (
+                      <Image
+                        src="/assets/images/icons/LoadingIcon.svg"
+                        alt=""
+                        className="animate-spin ml-2"
+                      />
+                    )}
                   </Button>
                 </AnimateButton>
               </Grid>

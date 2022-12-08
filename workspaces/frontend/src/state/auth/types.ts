@@ -5,24 +5,15 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import { IUser } from 'src/models/user'
+
 export enum AuthStatus {
   LOGGED_IN = 'LOGGED_IN',
   NOT_LOGGED_IN = 'NOT_LOGGED_IN',
   DEACTIVATE = 'DEACTIVATE',
 }
 
-export interface User {
-  id: string
-  social?: {
-    twitter?: {
-      username?: string
-      userId?: string
-    }
-    telegram?: { userId?: string }
-  }
-  createdAt: string // ISO Date
-  updatedAt: string // ISO Date
-}
+export interface User extends IUser {}
 
 export interface LoggedInAccount {
   token: string

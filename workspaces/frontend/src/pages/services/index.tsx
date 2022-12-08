@@ -8,6 +8,6 @@
 import { lazy } from 'react'
 import Loadable from 'src/components/Loadable'
 
-const Dashboard = Loadable(lazy(() => import('src/modules/dashboard')))
+const Services = Loadable(lazy(() => import('src/modules/services')))
 
-export default Dashboard
+export default Services
