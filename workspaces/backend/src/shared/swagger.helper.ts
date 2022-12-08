@@ -21,17 +21,15 @@ interface SwaggerEndpointOperation {
 }
 
 export async function initializeSwagger(app: INestApplication) {
-  if (!configCommon.swagger.baseUrl) {
+  if (configCommon.swagger.auth.enable) {
     app.use(
       configCommon.swagger.baseUrl,
-      configCommon.swagger.auth.enable
-        ? basicAuth({
-            challenge: true,
-            users: {
-              [configCommon.swagger.auth.username]: configCommon.swagger.auth.password,
-            },
-          })
-        : undefined,
+      basicAuth({
+        challenge: true,
+        users: {
+          [configCommon.swagger.auth.username]: configCommon.swagger.auth.password,
+        },
+      }),
     )
   }
 
