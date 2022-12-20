@@ -182,14 +182,16 @@ const AuthLogin = () => {
                     variant="contained"
                     color="primary"
                   >
-                    Login
                     {loading && (
                       <Image
                         src="/assets/images/icons/LoadingIcon.svg"
                         alt=""
-                        className="animate-spin ml-2"
+                        width={15}
+                        height={15}
+                        className="animate-spin mr-2"
                       />
                     )}
+                    Login
                   </Button>
                 </AnimateButton>
               </Grid>

@@ -24,6 +24,8 @@ import {
   Tabs,
   Typography,
 } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
 
 // project import
 import MainCard from 'src/components/MainCard'
@@ -32,9 +34,13 @@ import ProfileTab from './ProfileTab'
 import SettingTab from './SettingTab'
 
 // assets
-import avatar1 from 'src/assets/images/users/avatar-1.png'
+import noAvatar from 'src/assets/images/users/no-avatar.png'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { ThemeType } from 'src/models/theme'
+import { IUser } from 'src/models/user'
+import { RootState } from 'src/state/reducer'
+import { authSlice } from 'src/state/auth'
+import { AuthStatus } from 'src/state/auth/types'
 
 export interface TabPanelProps {
   index: any
@@ -68,9 +74,14 @@ function a11yProps(index: any) {
 
 const Profile = () => {
   const theme = useTheme<any>()
+  const router = useRouter()
+  const user: IUser | undefined = useSelector((state: RootState) => state.auth.user)
+  const dispatch = useDispatch()
 
   const handleLogout = async () => {
     // logout
+    dispatch(authSlice.actions.setNotLoggedIn(AuthStatus.DEACTIVATE))
+    router.push('/auth/login')
   }
 
   const anchorRef = useRef<any>(null)
@@ -110,8 +121,14 @@ const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar1.src} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">John Doe</Typography>
+          <Avatar
+            alt="profile user"
+            src={user?.avatar || noAvatar.src}
+            sx={{ width: 32, height: 32 }}
+          />
+          <Typography variant="subtitle1">
+            {user ? `${user.firstName} ${user.lastName}` : 'No Name'}
+          </Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -137,7 +154,8 @@ const Profile = () => {
             {open && (
               <Paper
                 sx={{
-                  boxShadow: theme.palette.mode === ThemeType.LIGHT ? theme.customShadows.z1 : undefined,
+                  boxShadow:
+                    theme.palette.mode === ThemeType.LIGHT ? theme.customShadows.z1 : undefined,
                   width: 290,
                   minWidth: 240,
                   maxWidth: 290,
@@ -154,13 +172,15 @@ const Profile = () => {
                           <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar
                               alt="profile user"
-                              src={avatar1.src}
+                              src={user?.avatar || noAvatar.src}
                               sx={{ width: 32, height: 32 }}
                             />
                             <Stack>
-                              <Typography variant="h6">John Doe</Typography>
+                              <Typography variant="h6">
+                                {user ? `${user.firstName} ${user.lastName}` : 'No Name'}
+                              </Typography>
                               <Typography variant="body2" color="textSecondary">
-                                UI/UX Designer
+                                {user?.username || 'N/A'}
                               </Typography>
                             </Stack>
                           </Stack>
