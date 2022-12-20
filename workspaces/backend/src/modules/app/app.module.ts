@@ -23,6 +23,7 @@ import { UserModule } from '../user/user.module'
 import { AwsModule } from '../aws/aws.module'
 import { CredentialsModule } from '../credentials/credentials.module'
 import { ProvidersModule } from '../providers/providers.module'
+import { StorageModule } from '../storage/storage.module'
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 import AnyExceptionFilter from 'src/common/filters/any-exception.filter'
 import { BaseTransferInterceptor } from '../../common/interceptors/response.interceptor'
@@ -41,6 +42,7 @@ const imports = [
   // SocketModule,
   UserModule,
   AwsModule,
+  StorageModule,
   CredentialsModule,
   ProvidersModule,
 ]
