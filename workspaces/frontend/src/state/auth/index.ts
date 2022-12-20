@@ -8,10 +8,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AuthState, AuthStatus, LoggedInAccount, User } from './types'
 import { RootState } from '../reducer'
+import { IToken } from 'src/models/auth'
 
 const initialState: AuthState = {
   status: AuthStatus.DEACTIVATE,
-  token: '',
+  token: undefined,
   user: undefined,
 }
 
@@ -22,7 +23,7 @@ export const authSlice = createSlice({
     setLoggedIn(
       state,
       action: PayloadAction<{
-        token: string
+        token?: IToken
         user?: User
       }>,
     ) {
@@ -32,8 +33,8 @@ export const authSlice = createSlice({
     },
     setNotLoggedIn(state, action: PayloadAction<AuthStatus>) {
       state.status = action.payload || AuthStatus.NOT_LOGGED_IN
-      // state.token = null
-      // state.user = null
+      state.token = undefined
+      state.user = undefined
       state.loggedInAccount = []
     },
     setCurrentUser(state, action: PayloadAction<{ user: User }>) {

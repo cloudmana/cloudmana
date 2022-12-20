@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin');
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -100,9 +100,6 @@ module.exports = {
         '140-px': '140px',
         48: '12rem',
       },
-      backgroundImage: {
-        'bg-dark-mode-modal': "url('../public/images/bg-darkmode-modal.png')",
-      },
       backgroundSize: {
         full: '100%',
       },
@@ -174,7 +171,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     plugin(function ({ addComponents, theme }) {
-      const screens = theme('screens', {});
+      const screens = theme('screens', {})
       addComponents([
         // {
         //   '.container': { width: '100%' },
@@ -214,7 +211,7 @@ module.exports = {
         //     },
         //   },
         // },
-      ]);
+      ])
     }),
   ],
-};
+}

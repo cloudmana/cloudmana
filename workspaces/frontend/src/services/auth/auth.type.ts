@@ -17,3 +17,11 @@ export interface ILoginResponse {
   token: IToken
   user: IUser
 }
+
+export interface IRegisterRequest {
+  firstName: string
+  lastName: string
+  username: string
+  email: string
+  password: string
+}

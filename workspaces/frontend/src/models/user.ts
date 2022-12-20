@@ -9,6 +9,7 @@ export interface IUser {
   id: number | string
   email: string
   username: string
+  avatar?: string
   firstName: string
   lastName: string
   isActive: boolean

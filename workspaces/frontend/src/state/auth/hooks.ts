@@ -18,7 +18,8 @@ import { clientApi } from '../../utils/api'
 import { useSetPendingSwitchAcc } from '../application/hooks'
 import { ToastTypes, useToastMessage } from 'src/hooks/useToastMessage'
 // import { useUpdateNotification } from '../notification/hooks'
-import { ILoginRequest } from 'src/services/auth/auth.type'
+import { ILoginRequest, IRegisterRequest } from 'src/services/auth/auth.type'
+import { postRegister } from 'src/services/auth/auth.service'
 
 export function useAuthState(): AuthState {
   return useAppSelector((state: AppState) => state.auth)
@@ -87,6 +88,43 @@ export function useLogin() {
 
   return {
     login,
+    loading,
+    error,
+  }
+}
+
+export function useRegister() {
+  const dispatch = useAppDispatch()
+  const [addToast] = useToastMessage()
+  const { status: authStatus, token } = useAuthState()
+  const setPendingAcc = useSetPendingSwitchAcc()
+
+  const [{ loading, error }, register] = useAsyncFn(
+    async (data: IRegisterRequest) => {
+      try {
+        setPendingAcc(true)
+        const user = await postRegister(data)
+        setPendingAcc(false)
+        if (user) {
+          addToast(ToastTypes.SUCCESS, 'Register successfully!')
+          return true
+        } else {
+          addToast(ToastTypes.ERROR, 'Failed to register!')
+        }
+      } catch (error: any) {
+        if (error?.response && error?.response?.data?.message?.statusCode === 400) {
+          addToast(ToastTypes.ERROR, error.response.data.message.message)
+        } else {
+          addToast(ToastTypes.ERROR, 'Something was wrong!')
+        }
+      }
+      return false
+    },
+    [dispatch, authStatus, token],
+  )
+
+  return {
+    register,
     loading,
     error,
   }

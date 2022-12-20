@@ -36,10 +36,7 @@ import AnalyticEcommerce from 'src/components/cards/statistics/AnalyticEcommerce
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons'
-import avatar1 from 'src/assets/images/users/avatar-1.png'
-import avatar2 from 'src/assets/images/users/avatar-2.png'
-import avatar3 from 'src/assets/images/users/avatar-3.png'
-import avatar4 from 'src/assets/images/users/avatar-4.png'
+import avatar from 'src/assets/images/users/no-avatar.png'
 
 // avatar style
 const avatarSX = {
@@ -359,10 +356,10 @@ const DashboardDefault = () => {
               </Grid>
               <Grid item>
                 <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
-                  <Avatar alt="Remy Sharp" src={avatar1.src} />
-                  <Avatar alt="Travis Howard" src={avatar2.src} />
-                  <Avatar alt="Cindy Baker" src={avatar3.src} />
-                  <Avatar alt="Agnes Walker" src={avatar4.src} />
+                  <Avatar alt="Remy Sharp" src={avatar.src} />
+                  <Avatar alt="Travis Howard" src={avatar.src} />
+                  <Avatar alt="Cindy Baker" src={avatar.src} />
+                  <Avatar alt="Agnes Walker" src={avatar.src} />
                 </AvatarGroup>
               </Grid>
             </Grid>

@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react'
 import RouterLink from 'next/link'
+import { useRouter } from 'next/router'
 
 // material-ui
 import {
@@ -33,6 +34,8 @@ import { Formik } from 'formik'
 import FirebaseSocial from './FirebaseSocial'
 import AnimateButton from 'src/components/@extended/AnimateButton'
 import { strengthColor, strengthIndicator } from 'src/utils/password-strength'
+import Image from 'src/components/Image'
+import { useRegister } from 'src/state/auth/hooks'
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
@@ -42,6 +45,9 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
 const AuthRegister = () => {
   const [level, setLevel] = useState<any>()
   const [showPassword, setShowPassword] = useState(false)
+  const { loading, register } = useRegister()
+  const router = useRouter()
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
@@ -63,21 +69,31 @@ const AuthRegister = () => {
     <>
       <Formik
         initialValues={{
-          firstname: '',
-          lastname: '',
+          firstName: '',
+          lastName: '',
           email: '',
-          company: '',
+          username: '',
           password: '',
+          passwordVerify: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          firstname: Yup.string().max(255).required('First Name is required'),
-          lastname: Yup.string().max(255).required('Last Name is required'),
+          firstName: Yup.string().max(255).required('First Name is required'),
+          lastName: Yup.string().max(255).required('Last Name is required'),
+          username: Yup.string()
+            .max(255)
+            .required('Username is required')
+            .matches(/^[a-z0-9]+$/, 'Username can only contain letters and number'),
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required'),
+          passwordVerify: Yup.string().max(255).required('Password verify is required'),
         })}
         onSubmit={async (_values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            const ok = await register(_values as any)
+            if (ok) {
+              router.push('/auth/login')
+            }
             setStatus({ success: false })
             setSubmitting(false)
           } catch (err: any) {
@@ -93,71 +109,71 @@ const AuthRegister = () => {
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                  <InputLabel htmlFor="firstName-signup">First Name*</InputLabel>
                   <OutlinedInput
-                    id="firstname-login"
-                    type="firstname"
-                    value={values.firstname}
-                    name="firstname"
+                    id="firstName-login"
+                    type="firstName"
+                    value={values.firstName}
+                    name="firstName"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="John"
                     fullWidth
-                    error={Boolean(touched.firstname && errors.firstname)}
+                    error={Boolean(touched.firstName && errors.firstName)}
                   />
-                  {touched.firstname && errors.firstname && (
-                    <FormHelperText error id="helper-text-firstname-signup">
-                      {errors.firstname}
+                  {touched.firstName && errors.firstName && (
+                    <FormHelperText error id="helper-text-firstName-signup">
+                      {errors.firstName}
                     </FormHelperText>
                   )}
                 </Stack>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
+                  <InputLabel htmlFor="lastName-signup">Last Name*</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.lastname && errors.lastname)}
-                    id="lastname-signup"
-                    type="lastname"
-                    value={values.lastname}
-                    name="lastname"
+                    error={Boolean(touched.lastName && errors.lastName)}
+                    id="lastName-signup"
+                    type="lastName"
+                    value={values.lastName}
+                    name="lastName"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="Doe"
                     inputProps={{}}
                   />
-                  {touched.lastname && errors.lastname && (
-                    <FormHelperText error id="helper-text-lastname-signup">
-                      {errors.lastname}
+                  {touched.lastName && errors.lastName && (
+                    <FormHelperText error id="helper-text-lastName-signup">
+                      {errors.lastName}
                     </FormHelperText>
                   )}
                 </Stack>
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="company-signup">Company</InputLabel>
+                  <InputLabel htmlFor="username-signup">Username*</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.company && errors.company)}
-                    id="company-signup"
-                    value={values.company}
-                    name="company"
+                    error={Boolean(touched.username && errors.username)}
+                    id="username-signup"
+                    value={values.username}
+                    name="username"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Demo Inc."
+                    placeholder="Username"
                     inputProps={{}}
                   />
-                  {touched.company && errors.company && (
-                    <FormHelperText error id="helper-text-company-signup">
-                      {errors.company}
+                  {touched.username && errors.username && (
+                    <FormHelperText error id="helper-text-username-signup">
+                      {errors.username}
                     </FormHelperText>
                   )}
                 </Stack>
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
+                  <InputLabel htmlFor="email-signup">Email*</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
@@ -179,7 +195,7 @@ const AuthRegister = () => {
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="password-signup">Password</InputLabel>
+                  <InputLabel htmlFor="password-signup">Password*</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.password && errors.password)}
@@ -214,7 +230,7 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                <FormControl fullWidth sx={{ mt: 2 }}>
+                {values.password && <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <Box
@@ -227,7 +243,59 @@ const AuthRegister = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                </FormControl>
+                </FormControl>}
+              </Grid>
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="passwordVerify-signup">Verify password*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    error={Boolean(touched.passwordVerify && errors.passwordVerify)}
+                    id="passwordVerify-signup"
+                    type={showPassword ? 'text' : 'password'}
+                    value={values.passwordVerify}
+                    name="passwordVerify"
+                    onBlur={handleBlur}
+                    onChange={(e) => {
+                      handleChange(e)
+                      changePassword(e.target.value)
+                    }}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          size="large"
+                        >
+                          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    placeholder="******"
+                    inputProps={{}}
+                  />
+                  {touched.passwordVerify && errors.passwordVerify && (
+                    <FormHelperText error id="helper-text-passwordVerify-signup">
+                      {errors.passwordVerify}
+                    </FormHelperText>
+                  )}
+                </Stack>
+                {values.passwordVerify && <FormControl fullWidth sx={{ mt: 2 }}>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Box
+                        sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle1" fontSize="0.75rem">
+                        {level?.label}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </FormControl>}
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="body2">
@@ -257,6 +325,15 @@ const AuthRegister = () => {
                     variant="contained"
                     color="primary"
                   >
+                    {loading && (
+                      <Image
+                        src="/assets/images/icons/LoadingIcon.svg"
+                        alt=""
+                        width={15}
+                        height={15}
+                        className="animate-spin mr-2"
+                      />
+                    )}
                     Create Account
                   </Button>
                 </AnimateButton>

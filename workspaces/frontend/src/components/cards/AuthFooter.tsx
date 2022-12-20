@@ -22,7 +22,7 @@ const AuthFooter = () => {
         textAlign={matchDownSM ? 'center' : 'inherit'}
       >
         <Typography variant="subtitle2" color="secondary" component="span">
-          &copy; Cloudmana Dashboard by&nbsp;
+          &copy; Cloudmana by&nbsp;
           <Typography
             component={Link}
             variant="subtitle2"

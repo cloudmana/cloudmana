@@ -5,6 +5,7 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import { IToken } from 'src/models/auth'
 import { IUser } from 'src/models/user'
 
 export enum AuthStatus {
@@ -16,13 +17,13 @@ export enum AuthStatus {
 export interface User extends IUser {}
 
 export interface LoggedInAccount {
-  token: string
+  token: IToken
   user?: User
 }
 
 export interface AuthState {
   status: AuthStatus
-  token: string
+  token?: IToken
   user?: User
   loggedInAccount?: LoggedInAccount[]
 }
