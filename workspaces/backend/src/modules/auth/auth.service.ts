@@ -28,10 +28,10 @@ export class AuthService {
     return await this.repository.save(new User(user))
   }
 
-  async login(user: any) {
+  async login(user: User) {
     const payload: IPayload = {
       username: user.username,
-      userId: user.id,
+      userId: user._id.toString(),
       email: user.email,
       role: user.role,
       roles: user.roles,

@@ -5,18 +5,6 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { List } from 'lodash'
+import { Pagination } from 'nestjs-typeorm-paginate'
 
-export class BaseResponse<T> {
-  doc?: T
-  docs?: List<T>
-  totalDocs?: number
-  limit?: number
-  totalPages?: number
-  page?: number
-  pagingCounter?: number
-  hasPrevPage?: boolean
-  hasNextPage?: boolean
-  prevPage?: any
-  nextPage?: any
-}
+export class BaseResponse<T> extends Pagination<T> {}

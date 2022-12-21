@@ -8,11 +8,11 @@
 import config from 'src/common/config'
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { TypeormLogger } from 'src/shared/logger.helper'
+import { TypeormLogger } from 'src/helpers/logger.helper'
 
-export class TypeOrmModuleConfigService implements TypeOrmOptionsFactory {
+export class TypeOrmModuleConfig implements TypeOrmOptionsFactory {
   constructor(
-    @InjectPinoLogger(TypeOrmModuleConfigService.name)
+    @InjectPinoLogger(TypeOrmModuleConfig.name)
     private readonly logger: PinoLogger,
   ) {}
   createTypeOrmOptions(): TypeOrmModuleOptions | Promise<TypeOrmModuleOptions> {
@@ -23,27 +23,10 @@ export class TypeOrmModuleConfigService implements TypeOrmOptionsFactory {
       type: dbConfig.client as any,
       database: dbConfig.database,
       url: dbConfig.uri,
+      synchronize: true,
       autoLoadEntities: true,
       logging: config.nodeEnv !== 'production',
       logger: new TypeormLogger(),
-    }
-  }
-
-  private static paginate(items, page = 1, perPage = 20) {
-    const limit = Number(perPage)
-    const offset = limit * (page - 1)
-    const totalPages = Math.ceil(items.length / limit)
-    const paginatedItems = items.slice(offset, limit * page)
-    return {
-      docs: paginatedItems,
-      totalDocs: items.length,
-      limit,
-      totalPages: totalPages,
-      page: page,
-      hasPrevPage: page > 1,
-      hasNextPage: page < totalPages,
-      prevPage: page > 1 ? page - 1 : null,
-      nextPage: page < totalPages ? page + 1 : null,
     }
   }
 }

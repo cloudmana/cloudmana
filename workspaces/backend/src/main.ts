@@ -12,7 +12,7 @@ import responseTime from 'response-time'
 import { v4 as uuidV4 } from 'uuid'
 import { CORS_EXPOSED_HEADERS } from './common/constants'
 import { AppModule } from './modules/app/app.module'
-import { initializeSwagger } from './shared/swagger.helper'
+import { initializeSwagger } from './helpers/swagger.helper'
 import config from 'src/common/config'
 
 async function bootstrap() {

@@ -62,6 +62,7 @@ export async function initializeSwagger(app: INestApplication) {
   SwaggerModule.setup(config.get('server.swagger.baseUrl'), app, oas3, {
     swaggerOptions: {
       displayOperationId: true,
+      persistAuthorization: true,
     },
   })
 }

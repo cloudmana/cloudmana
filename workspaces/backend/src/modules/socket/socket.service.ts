@@ -7,7 +7,7 @@
 
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { RedisService } from '../../shared/services/redis.service'
+import { RedisService } from '../_shared/services/redis.service'
 import { RedisClientType } from 'redis'
 
 @Injectable()

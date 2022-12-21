@@ -5,8 +5,10 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm'
-import { TypeormAdapter } from 'src/shared/databases/typeorm.adapter'
+import { FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from 'typeorm'
+import { TypeormAdapter } from 'src/modules/_shared/databases/typeorm.adapter'
+import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate'
+import { TypeOrmModuleHelper } from '../_shared/databases/typeorm.helper'
 
 export class BaseRepository<T> extends Repository<T> {
   private readonly adapter = new TypeormAdapter()
@@ -24,5 +26,9 @@ export class BaseRepository<T> extends Repository<T> {
   findOne(options?: FindOneOptions) {
     const opts = this.adapter.buildQuery(options)
     return this.repository.findOne(opts)
+  }
+
+  async paginate(query: FindOptionsWhere<T>, options: IPaginationOptions): Promise<Pagination<T>> {
+    return paginate<T>(this.repository, options, query)
   }
 }

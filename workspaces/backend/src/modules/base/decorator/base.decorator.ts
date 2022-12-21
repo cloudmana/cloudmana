@@ -10,9 +10,9 @@ import { ObjectIdColumn, PrimaryGeneratedColumn } from 'typeorm'
 import config from 'src/common/config'
 import { DATABASE_CLIENT } from 'src/common/constants'
 
-export const PrimaryColumn = () => {
+export const PrimaryColumn = (args?: any) => {
   if (config.database.client === DATABASE_CLIENT.MONGODB) {
-    return applyDecorators(ObjectIdColumn({ type: 'varchar' }))
+    return applyDecorators(ObjectIdColumn({ primary: true, type: 'varchar', ...args }))
   }
-  return applyDecorators(PrimaryGeneratedColumn())
+  return applyDecorators(PrimaryGeneratedColumn(args))
 }

@@ -6,7 +6,6 @@
  */
 
 import _ from 'lodash'
-import { IPagination, IHandlePagination, IPaginationMeta } from './interfaces'
 import express from 'express'
 
 import {
@@ -19,6 +18,7 @@ import {
 import { BaseResponse } from 'src/modules/base/base.response'
 import { Readable } from 'stream'
 import { HttpException, InternalServerErrorException } from '@nestjs/common'
+import { IPaginationOptions } from 'nestjs-typeorm-paginate'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const csvStringify = require('csv-stringify')
 
@@ -60,10 +60,10 @@ export const getAuthorizationObject = () =>
       }
     : undefined
 
-export const initPaginationMeta = (): IPaginationMeta => {
+export const initPaginationMeta = (): IPaginationOptions => {
   return {
-    limit: 50,
-    offset: 0,
+    limit: 20,
+    page: 1,
   }
 }
 
@@ -71,35 +71,15 @@ export const APPLICATION_JSON = 'application/json'
 export const ACCESS_TOKEN_HEADER_NAME = 'apiKey'
 export const SUB_HEADER_NAME = 'sub'
 
-export const generatePaginationHeader = (paginatinatedResult: IPagination<any>) => {
-  const pageNo =
-    (paginatinatedResult.offset + paginatinatedResult.limit) / paginatinatedResult.limit
-  const totalPages = Math.ceil(paginatinatedResult.total / paginatinatedResult.limit)
-  return {
-    [TOTAL_COUNT_HEADER_NAME]: paginatinatedResult.total,
-    [NEXT_PAGE_HEADER_NAME]: pageNo + 1,
-    [PAGE_HEADER_NAME]: pageNo,
-    [PAGES_COUNT_HEADER_NAME]: totalPages,
-    [PER_PAGE_HEADER_NAME]: paginatinatedResult.limit,
-  }
-}
-
-export const populatePaginationHeaders = <T>(result: IPagination<T>, res: express.Response) => {
-  const paginationHeaders = generatePaginationHeader(result)
-  for (const header in paginationHeaders) {
-    if (paginationHeaders[header]) {
-      res.setHeader(header, paginationHeaders[header])
-    }
-  }
-}
-
 export const generatePaginationHeaderV2 = (paginatinatedResult: BaseResponse<any>) => {
+  const { meta } = paginatinatedResult
   return {
-    [TOTAL_COUNT_HEADER_NAME]: paginatinatedResult.totalDocs,
-    [NEXT_PAGE_HEADER_NAME]: paginatinatedResult.nextPage,
-    [PAGE_HEADER_NAME]: paginatinatedResult.page,
-    [PAGES_COUNT_HEADER_NAME]: paginatinatedResult.totalPages,
-    [PER_PAGE_HEADER_NAME]: paginatinatedResult.limit,
+    [TOTAL_COUNT_HEADER_NAME]: meta.totalItems,
+    [NEXT_PAGE_HEADER_NAME]:
+      meta.currentPage === meta.totalPages ? undefined : meta.currentPage + 1,
+    [PAGE_HEADER_NAME]: meta.currentPage,
+    [PAGES_COUNT_HEADER_NAME]: meta.totalPages,
+    [PER_PAGE_HEADER_NAME]: meta.itemsPerPage,
   }
 }
 
@@ -114,28 +94,11 @@ export function genRandomString(length: number) {
 }
 
 export const generatePaginationMetadata = (paginatedResult: BaseResponse<any>) => {
-  return {
-    currentPage: paginatedResult.page,
-    nextPage: paginatedResult.nextPage,
-    pageSize: paginatedResult.limit,
-    pageCount: paginatedResult.totalPages,
-    totalCount: paginatedResult.totalDocs,
-  }
+  return { ...paginatedResult.meta }
 }
 
 export const paginationSpread = (paginatedResult: BaseResponse<any>) => {
-  return _.omit(paginatedResult, [
-    'docs',
-    'totalDocs',
-    'limit',
-    'totalPages',
-    'page',
-    'pagingCounter',
-    'hasPrevPage',
-    'hasNextPage',
-    'prevPage',
-    'nextPage',
-  ])
+  return _.omit(paginatedResult, ['meta', 'items'])
 }
 
 export function performance_now(eventName = null) {
@@ -252,50 +215,4 @@ export function groupBy<T, KeyType>(items: T[], getKey: (item: T) => KeyType): M
     }
   }
   return result
-}
-
-export function handlePaginate(data: IHandlePagination<any>) {
-  const { items = [], page, size, totalItems: total } = data
-  const totalItems = total ? total : items.length
-  const totalPages = Math.ceil(totalItems / size)
-  let newItems
-  if (page > totalPages) {
-    throw new Error('Page don\'t exist')
-  } else if (page == totalPages - 1) {
-    newItems = items.slice((page - 1) * size, totalItems)
-  } else {
-    newItems = items.slice((page - 1) * size, page * size)
-  }
-  return {
-    ...data,
-    totalPages,
-    totalItems,
-    items: newItems,
-  }
-}
-
-export function convertPagination(pagination?: { limit: number; page: number }) {
-  if (pagination) {
-    pagination.limit = Number(pagination.limit ?? 1)
-    if (pagination.limit > 100) pagination.limit = 100
-    else if (pagination.limit < 1) pagination.limit = 1
-    pagination.page = Number(pagination.page ?? 1)
-    if (pagination.page < 1) pagination.page = 1
-  }
-  const skip = ((pagination.page || 1) - 1) * pagination.limit
-  return {
-    skip,
-    limit: pagination.limit,
-  }
-}
-
-export function getIndex<T, KeyType>(items: T[], key: KeyType, getKey: (item: T) => KeyType) {
-  let index = 0
-  for (const item of items) {
-    if (key == getKey(item)) {
-      return index
-    }
-    index += 1
-  }
-  return -1
 }
