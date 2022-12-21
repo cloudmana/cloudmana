@@ -57,6 +57,18 @@ yarn api start:prod
   yarn api migrate:down
   ```
 
+- Containerize app:
+
+  ```bash
+  # Build
+  docker build -t cloudmana/cloudmana:local -f docker/Dockerfile .
+
+  # docker-compose with DockerHub
+  docker-compose up -d
+  # docker-compose with local build
+  docker-compose -f docker/docker-compose.yml up
+  ```
+
 ## Support
 
 Cloudmana is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers.

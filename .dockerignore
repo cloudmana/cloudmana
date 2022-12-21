@@ -1,0 +1,9 @@
+**/build
+**/node_modules
+**/dist
+**/db_data
+**/.next
+**/out
+**/.git
+**/.github
+**/.vscode

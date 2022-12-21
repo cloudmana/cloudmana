@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  cloudmana:
+    container_name: cloudmana
+    image: cloudmana/cloudmana:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./.env:/app/.env
+      - ./config.yaml:/app/config/prod.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
