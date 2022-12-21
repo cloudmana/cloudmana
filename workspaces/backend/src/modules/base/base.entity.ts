@@ -2,6 +2,7 @@ import {
   BaseEntity as _BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  PrimaryColumn as _PrimaryColumn,
 } from 'typeorm'
 import { ObjectId } from 'mongodb'
 import { PrimaryColumn } from './decorator/base.decorator'
@@ -13,7 +14,7 @@ export class BaseEntity<T> extends _BaseEntity {
   }
 
   @PrimaryColumn()
-  id: number | ObjectId
+  _id: number | ObjectId
 
   @CreateDateColumn({
     default: new Date().toISOString(),

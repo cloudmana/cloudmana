@@ -5,28 +5,45 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
 import {
   generatePaginationHeaderV2,
   generatePaginationMetadata,
   paginationSpread,
-} from '../../shared/helper'
+} from '../../helpers/helper'
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 @Injectable()
-export class TransferInterceptor implements NestInterceptor {
+export class BaseTransferInterceptor implements NestInterceptor {
+  private updateBodyRequest(body: any) {
+    if (body instanceof Object) {
+      for (const key of Object.keys(body)) {
+        if (body[key] instanceof Object || body[key] instanceof Array) {
+          this.updateBodyRequest(body[key])
+        }
+      }
+    } else {
+      if (body instanceof Array) {
+        for (const b of body) {
+          this.updateBodyRequest(b)
+        }
+      }
+    }
+  }
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const contextHttpReq = context.switchToHttp().getRequest()
+    this.updateBodyRequest(contextHttpReq.body)
+
     const contextHttp = context.switchToHttp().getResponse()
+
     return next.handle().pipe(
-      // make change the any type to Type suitable with context
       map((data: any) => {
-        if (data?.docs) {
+        if (data?.items) {
           if (contextHttpReq.query.paginationVersion === '2') {
             return {
               ...paginationSpread(data),
-              data: data.docs,
+              data: data.items,
               metadata: generatePaginationMetadata(data),
             }
           }
@@ -37,7 +54,7 @@ export class TransferInterceptor implements NestInterceptor {
               contextHttp.header(header, paginationHeaders[header])
             }
           }
-          return data.docs
+          return data.items
         }
         return data
       }),

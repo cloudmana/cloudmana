@@ -4,7 +4,7 @@ import { AuthService } from './auth.service'
 import { User } from '../user/user.entity'
 import { LocalAuthGuard } from './guard/local-auth.guard'
 import { JwtRefreshTokenGuard } from './guard/jwt-refresh-token.guard'
-import { GetUser } from './decorator/get-user.decorator'
+import { CurrentUser } from './decorator/current-user.decorator'
 import { UserLoginRequestDto, UserSignupDto } from '../user/dto/user.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
 
@@ -30,7 +30,7 @@ export class AuthController {
 
   @UseGuards(JwtRefreshTokenGuard)
   @Post('refresh-token')
-  async refreshToken(@GetUser() user: User, @Body() token: RefreshTokenDto) {
+  async refreshToken(@CurrentUser() user: User, @Body() token: RefreshTokenDto) {
     return this.usersService.refreshToken(user, token)
   }
 }
