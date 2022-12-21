@@ -7,7 +7,11 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    unoptimized: true,
+  },
+}
 
 module.exports = nextConfig
 

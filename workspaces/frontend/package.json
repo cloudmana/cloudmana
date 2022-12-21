@@ -6,8 +6,10 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
+    "export": "next export",
     "format": "prettier --write \"src/**/*.js\"",
-    "lint": "eslint \"src/**/*.js\" --fix"
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",

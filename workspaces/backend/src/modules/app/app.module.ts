@@ -13,7 +13,9 @@ import { EventEmitterModule } from '@nestjs/event-emitter'
 import { TypeOrmModuleConfig } from 'src/modules/_shared/databases/typeorm.config'
 import { SharedModule } from 'src/modules/_shared/shared.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { ServeStaticModule } from '@nestjs/serve-static'
 import config from 'src/common/config'
+import { join } from 'path'
 import { loggerConfig } from 'src/helpers/logger.helper'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -34,6 +36,10 @@ const imports = [
   }),
   EventEmitterModule.forRoot(),
   CacheModule.register(config.redisConfig),
+  ServeStaticModule.forRoot({
+    rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../..', 'client'),
+    exclude: [config.baseUrl + '*'],
+  }),
   DiscoveryModule,
   TypeOrmModule.forRootAsync({ useClass: TypeOrmModuleConfig }),
   SharedModule,

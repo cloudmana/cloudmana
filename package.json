@@ -16,6 +16,7 @@
     "start:api": "yarn api start",
     "format": "yarn app format && yarn api format",
     "lint": "yarn app lint && yarn api lint",
+    "lint:fix": "yarn app lint:fix && yarn api lint:fix",
     "build": "yarn app build && yarn api build",
     "app": "yarn workspace @cloudmana/frontend",
     "api": "yarn workspace @cloudmana/backend"
