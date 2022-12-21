@@ -7,7 +7,6 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 COPY workspaces/backend/package.json ./workspaces/backend/package.json
 COPY workspaces/frontend/package.json ./workspaces/frontend/package.json
-RUN ls -la workspaces/backend
 RUN yarn
 
 # Copy source code & build

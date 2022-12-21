@@ -13,8 +13,8 @@ on:
         - 'develop'
 
 jobs:
-  build-and-push-to-registry:
-    name: Build & Push Docker image to Registry
+  release:
+    name: release
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
