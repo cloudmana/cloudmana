@@ -35,9 +35,9 @@ const imports = [
       loggerConfig(process.env.NODE_ENV || config.nodeEnv, config.logger.autoLogging),
   }),
   EventEmitterModule.forRoot(),
-  CacheModule.register(config.redisConfig),
+  CacheModule.register(config.cacheConfig),
   ServeStaticModule.forRoot({
-    rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../..', 'client'),
+    rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../', 'frontend', 'out'),
     exclude: [config.baseUrl + '*'],
   }),
   DiscoveryModule,

@@ -13,8 +13,8 @@ on:
         - 'develop'
 
 jobs:
-  release:
-    name: release
+  build-and-push-to-registry:
+    name: Build & Push Docker image to Registry
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -46,7 +46,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: docker/Dockerfile
+          file: .docker/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

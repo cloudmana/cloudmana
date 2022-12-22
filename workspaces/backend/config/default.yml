@@ -26,12 +26,14 @@ auth:
 
 database:
   default: sqlite
+  timeout: 3000
   sqlite:
     database: db_data/cloudmana.db
   mongodb:
     uri: mongodb://localhost/cloudmana
 
 redis:
+  enable: false
   uri: redis://localhost/0
   prefix: cloudmana
 

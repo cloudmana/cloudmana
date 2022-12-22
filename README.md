@@ -61,12 +61,12 @@ yarn api start:prod
 
   ```bash
   # Build
-  docker build -t cloudmana/cloudmana:local -f docker/Dockerfile .
+  docker build -t cloudmana/cloudmana:local -f .docker/Dockerfile .
 
   # docker-compose with DockerHub
   docker-compose up -d
   # docker-compose with local build
-  docker-compose -f docker/docker-compose.yml up
+  docker-compose -f .docker/docker-compose.yml up
   ```
 
 ## Support

@@ -6,7 +6,7 @@ services:
     image: cloudmana/cloudmana:latest
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: .docker/Dockerfile
     restart: always
     ports:
       - 8080:8080

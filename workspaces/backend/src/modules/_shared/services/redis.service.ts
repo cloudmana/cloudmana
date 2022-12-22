@@ -12,17 +12,19 @@ import config from 'src/common/config'
 
 @Injectable()
 export class RedisService {
-  private redisClient = this.newRedisClient()
+  private redisClient = config.redisConfig.enable ? this.newRedisClient() : undefined
 
   constructor(
     @InjectPinoLogger(RedisService.name)
     private readonly logger: PinoLogger,
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;(async () => {
-      this.redisClient = this.newRedisClient()
-      await this.redisClient.connect()
-    })()
+    if (config.redisConfig.enable) {
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
+      ;(async () => {
+        this.redisClient = this.newRedisClient()
+        await this.redisClient.connect()
+      })()
+    }
   }
 
   public newRedisClient() {
