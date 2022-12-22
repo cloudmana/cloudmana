@@ -30,14 +30,21 @@ FROM node:16-alpine
 # Workdir
 WORKDIR /app
 
+# Copy source built
 COPY --from=builder2 app/node_modules ./node_modules
 COPY --from=builder1 app/workspaces/backend/dist ./dist
 COPY --from=builder1 app/workspaces/backend/config/default.yml ./config/default.yml
 COPY --from=builder1 app/workspaces/frontend/out ./client
 
+# Env default
 ENV NODE_ENV=prod \
   APP_CLIENT_DIR=/app/client
 
-EXPOSE 3000
+# Export port
+EXPOSE 8080
 
-CMD ["node", "dist/main"]
+# Volumn db for sqlite
+VOLUME [ "/app/db_data" ]
+
+# Start app
+ENTRYPOINT ["node", "dist/main"]

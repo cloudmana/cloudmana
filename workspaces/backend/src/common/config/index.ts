@@ -87,6 +87,20 @@ export class Config {
     }
   }
 
+  get cacheConfig(): any {
+    const rc = this.redisConfig
+    return {
+      isGlobal: true,
+      ...(rc.enable
+        ? {
+            store: redisStore,
+            url: rc.url,
+            prefix: rc.prefix,
+          }
+        : {}),
+    }
+  }
+
   public getString(key: string): string {
     const value = config.get<string>(key)
     if (isNil(value)) {
