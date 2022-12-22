@@ -9,6 +9,7 @@ import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { RedisService } from '../_shared/services/redis.service'
 import { RedisClientType } from 'redis'
+import config from 'src/common/config'
 
 @Injectable()
 export class SocketService implements OnModuleInit, OnModuleDestroy {
@@ -25,27 +26,31 @@ export class SocketService implements OnModuleInit, OnModuleDestroy {
   ) {
     this.serviceId = 'SOCKET_CHANNEL_' + Math.random().toString(26).slice(2)
 
-    setInterval(() => {
-      this.sendMessage(
-        'user1',
-        new Date().toLocaleTimeString() + ` | from server on port ${process.env['PORT']}`,
-        false,
-      )
-    }, 3000)
+    if (config.redisConfig.enable) {
+      setInterval(() => {
+        this.sendMessage(
+          'user1',
+          new Date().toLocaleTimeString() + ` | from server on port ${process.env['PORT']}`,
+          false,
+        )
+      }, 3000)
+    }
   }
 
   async onModuleInit() {
-    this.pubClient = this.redisService.newRedisClient() as RedisClientType
-    this.subClient = (await this.redisService.newRedisClient()) as RedisClientType
-    await this.pubClient.connect()
-    await this.subClient.connect()
+    if (config.redisConfig.enable) {
+      this.pubClient = this.redisService.newRedisClient() as RedisClientType
+      this.subClient = (await this.redisService.newRedisClient()) as RedisClientType
+      await this.pubClient.connect()
+      await this.subClient.connect()
 
-    this.subClient.subscribe(this.serviceId, (message) => {
-      const { walletAddress, payload } = JSON.parse(message)
-      this.sendMessage(walletAddress, payload, true)
-    })
+      this.subClient.subscribe(this.serviceId, (message) => {
+        const { walletAddress, payload } = JSON.parse(message)
+        this.sendMessage(walletAddress, payload, true)
+      })
 
-    await this.channelDiscovery()
+      await this.channelDiscovery()
+    }
   }
 
   async onModuleDestroy() {
@@ -64,7 +69,7 @@ export class SocketService implements OnModuleInit, OnModuleDestroy {
       payload = JSON.stringify(payload)
     }
     this.connectedSockets[walletAddress]?.forEach((socket) => socket.send(payload))
-    if (!fromRedisChannel) {
+    if (config.redisConfig.enable && !fromRedisChannel) {
       this.redisService.keys('SOCKET_CHANNEL_*', (err, ids) => {
         ids
           .filter((p) => p != this.serviceId)

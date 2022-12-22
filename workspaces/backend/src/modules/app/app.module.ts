@@ -37,7 +37,7 @@ const imports = [
   EventEmitterModule.forRoot(),
   CacheModule.register(config.redisConfig),
   ServeStaticModule.forRoot({
-    rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../..', 'client'),
+    rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../', 'frontend', 'out'),
     exclude: [config.baseUrl + '*'],
   }),
   DiscoveryModule,

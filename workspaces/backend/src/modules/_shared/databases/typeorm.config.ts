@@ -23,6 +23,8 @@ export class TypeOrmModuleConfig implements TypeOrmOptionsFactory {
       type: dbConfig.client as any,
       database: dbConfig.database,
       url: dbConfig.uri,
+      timeout: dbConfig.timeout,
+      retryAttempts: 3,
       synchronize: true,
       autoLoadEntities: true,
       logging: config.nodeEnv !== 'production',

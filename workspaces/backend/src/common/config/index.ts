@@ -54,6 +54,7 @@ export class Config {
     return {
       client,
       hasUri,
+      timeout: this.getNumber('database.timeout'),
       uri: hasUri ? this.getString(`database.${client}.uri`) : undefined,
       database: !hasUri ? this.getString(`database.${client}.database`) : undefined,
     }
@@ -80,6 +81,7 @@ export class Config {
     return {
       isGlobal: true,
       store: redisStore,
+      enable: this.getBoolean('redis.enable'),
       url: this.getString('redis.uri'),
       prefix: `${this.getString('redis.prefix')}_${this.nodeEnv}_`,
     }
