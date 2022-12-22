@@ -7,6 +7,7 @@ import { UserSignupDto } from '../user/dto/user.dto'
 import { User } from '../user/user.entity'
 import { IPayload } from './interface/auth.interface'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
+import { TypeOrmModuleHelper } from '../_shared/databases/typeorm.helper'
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,7 @@ export class AuthService {
   async login(user: User) {
     const payload: IPayload = {
       username: user.username,
-      userId: user._id.toString(),
+      userId: TypeOrmModuleHelper.convertCollectionId(user._id),
       email: user.email,
       role: user.role,
       roles: user.roles,
@@ -51,7 +52,7 @@ export class AuthService {
   async refreshToken(user: any, _: RefreshTokenDto) {
     const payload: IPayload = {
       username: user.username,
-      userId: user.id,
+      userId: user._id,
       email: user.email,
       role: user.role,
       roles: user.roles,

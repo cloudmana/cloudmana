@@ -5,9 +5,11 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import { PrimaryIdType } from 'src/common/types/entity.type'
+
 export interface IPayload {
   username: string
-  userId: string
+  userId: PrimaryIdType
   email: string
   role: string
   roles: string

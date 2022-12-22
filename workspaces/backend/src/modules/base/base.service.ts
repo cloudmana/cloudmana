@@ -7,7 +7,6 @@
 
 import { BaseEntity, DeleteResult, In, Repository, FindOptionsWhere } from 'typeorm'
 import { IBaseService } from './interfaces/base.service.interface'
-import { EntityId } from 'typeorm/repository/EntityId'
 import { TypeOrmModuleHelper } from '../_shared/databases/typeorm.helper'
 
 export class BaseService<T extends BaseEntity, R extends Repository<T>> implements IBaseService<T> {

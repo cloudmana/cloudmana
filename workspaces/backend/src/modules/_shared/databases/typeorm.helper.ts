@@ -40,7 +40,7 @@ export class TypeOrmModuleHelper {
   }
 
   static transformObjectId(obj: any) {
-    if (typeof obj !== 'object') return this.convertCollectionId(obj)
+    if (typeof obj !== 'object' || obj === null) return this.convertCollectionId(obj)
     const output = obj
     Object.keys(obj).map((k) => {
       output[k] = this.transformObjectId(obj[k])

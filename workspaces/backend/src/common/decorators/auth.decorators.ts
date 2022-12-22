@@ -7,7 +7,7 @@
 
 import { applyDecorators, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth } from '@nestjs/swagger'
-import { RoleAdmin } from 'src/modules/auth/decorator/role.decorator'
+import { RoleAdmin } from 'src/common/decorators/role.decorator'
 import { JwtAuthGuard } from 'src/modules/auth/guard/jwt.guard'
 import { ApiErrorResponses } from 'src/modules/_shared/sample.decorator'
 

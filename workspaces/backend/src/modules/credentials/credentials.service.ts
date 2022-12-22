@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { TypeOrmModuleHelper } from 'src/modules/_shared/databases/typeorm.helper'
 import { BaseService } from '../base/base.service'
+import { ProvidersRepository } from '../providers/providers.repository'
 import { User } from '../user/user.entity'
 import { Credentials } from './credentials.entity'
 import { CredentialsRepository } from './credentials.repository'
@@ -15,6 +16,7 @@ import {
 export class CredentialsService extends BaseService<Credentials, CredentialsRepository> {
   constructor(
     repository: CredentialsRepository,
+    private readonly providersRepository: ProvidersRepository,
     @InjectPinoLogger(CredentialsService.name)
     private readonly logger: PinoLogger,
   ) {
@@ -44,6 +46,7 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
     }
 
     const data = {
+      name: credentials.name,
       accessKeyId: credentials.accessKeyId,
       secretAccessKey: credentials.secretAccessKey,
       providerId: credentials.providerId,
@@ -59,9 +62,17 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
         userId: TypeOrmModuleHelper.transformCollectionId(user._id),
       },
     })
-
     if (!creds) {
       throw new BadRequestException('Credentials not found')
+    }
+
+    const provider = await this.providersRepository.findOne({
+      where: {
+        _id: TypeOrmModuleHelper.transformCollectionId(credentials.providerId),
+      },
+    })
+    if (!provider) {
+      throw new BadRequestException('Provider not found')
     }
 
     const data: any = {

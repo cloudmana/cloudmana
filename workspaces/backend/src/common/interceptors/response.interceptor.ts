@@ -13,6 +13,7 @@ import {
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { instanceToPlain } from 'class-transformer'
 
 @Injectable()
 export class BaseTransferInterceptor implements NestInterceptor {
@@ -31,33 +32,37 @@ export class BaseTransferInterceptor implements NestInterceptor {
       }
     }
   }
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const contextHttpReq = context.switchToHttp().getRequest()
     this.updateBodyRequest(contextHttpReq.body)
 
     const contextHttp = context.switchToHttp().getResponse()
 
-    return next.handle().pipe(
-      map((data: any) => {
-        if (data?.items) {
-          if (contextHttpReq.query.paginationVersion === '2') {
-            return {
-              ...paginationSpread(data),
-              data: data.items,
-              metadata: generatePaginationMetadata(data),
+    return next
+      .handle()
+      .pipe(
+        map((data: any) => {
+          if (data?.items) {
+            if (contextHttpReq.query.paginationVersion === '2') {
+              return {
+                ...paginationSpread(data),
+                data: data.items,
+                metadata: generatePaginationMetadata(data),
+              }
             }
-          }
 
-          const paginationHeaders = generatePaginationHeaderV2(data)
-          for (const header in paginationHeaders) {
-            if (paginationHeaders[header]) {
-              contextHttp.header(header, paginationHeaders[header])
+            const paginationHeaders = generatePaginationHeaderV2(data)
+            for (const header in paginationHeaders) {
+              if (paginationHeaders[header]) {
+                contextHttp.header(header, paginationHeaders[header])
+              }
             }
+            return data.items
           }
-          return data.items
-        }
-        return data
-      }),
-    )
+          return data
+        }),
+      )
+      .pipe(map((data) => instanceToPlain(data)))
   }
 }

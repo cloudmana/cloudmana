@@ -7,6 +7,8 @@
 
 import { IsArray, IsNotEmpty, IsNotEmptyObject, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { PrimaryIdType } from 'src/common/types/entity.type'
+import { IsColumnId } from 'src/common/decorators/validator.decorator'
 
 export class CredentialsImportDto {
   @IsString()
@@ -39,7 +41,7 @@ export class CredentialsImportDto {
   })
   secretAccessKey: string
 
-  @IsString()
+  @IsColumnId()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
@@ -47,11 +49,11 @@ export class CredentialsImportDto {
     description: 'providerId',
     default: '',
   })
-  providerId: number | string
+  providerId: PrimaryIdType
 }
 
 export class CredentialsUpdateDto extends CredentialsImportDto {
-  @IsString()
+  @IsColumnId()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
@@ -59,7 +61,7 @@ export class CredentialsUpdateDto extends CredentialsImportDto {
     description: '_id',
     default: '',
   })
-  _id: number | string
+  _id: PrimaryIdType
 
   @IsString()
   @IsOptional()
@@ -81,7 +83,7 @@ export class CredentialsUpdateDto extends CredentialsImportDto {
   })
   secretAccessKey: string
 
-  @IsString()
+  @IsColumnId()
   @IsOptional()
   @ApiProperty({
     type: String,
@@ -89,17 +91,17 @@ export class CredentialsUpdateDto extends CredentialsImportDto {
     description: 'providerId',
     default: '',
   })
-  providerId: number | string
+  providerId: PrimaryIdType
 }
 
 export class CredentialsDeleteDto {
   @IsArray()
   @IsNotEmptyObject()
   @ApiProperty({
-    type: Array<String>,
+    type: Array<String | number>,
     required: true,
     description: 'List IDs',
     default: [],
   })
-  _ids: Array<number | string>
+  _ids: Array<PrimaryIdType>
 }

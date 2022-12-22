@@ -5,9 +5,10 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
+import { IdColumn } from 'src/common/decorators/base.decorator'
 import { Column, Entity, Unique } from 'typeorm'
 import { BaseEntity } from '../base/base.entity'
-import { ObjectId } from 'mongodb'
+import { EntityIdType } from 'src/common/types/entity.type'
 
 @Entity({ name: 'credentials' })
 @Unique(['accessKeyId', 'secretAccessKey', 'userId', 'providerId'])
@@ -21,9 +22,9 @@ export class Credentials extends BaseEntity<Credentials> {
   @Column({ nullable: false })
   secretAccessKey: string
 
-  @Column({ nullable: false })
-  providerId: number | ObjectId
+  @IdColumn({ name: 'providerId', nullable: false })
+  providerId: EntityIdType
 
-  @Column({ nullable: false })
-  userId: number | ObjectId
+  @IdColumn({ name: 'userId', nullable: false })
+  userId: EntityIdType
 }

@@ -47,10 +47,14 @@ export function loggerConfig(env: string, auto: boolean): Params {
 export class TypeormLogger implements DbLogger {
   private readonly logger = new Logger(TypeormLogger.name)
 
-  logQuery(query: string, _parameters?: any[], queryRunner?: QueryRunner) {
+  _log(name: string, query: string, parameters?: any[], queryRunner?: QueryRunner) {
     const requestUrl =
       queryRunner && queryRunner.data['request'] ? '(' + queryRunner.data['request'].url + ') ' : ''
-    this.logger.log(requestUrl + 'Executing query: ' + query)
+    this.logger.log(`${requestUrl}Executing query: (${query}) Parameters: (${parameters})`)
+  }
+
+  logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
+    this._log('logQuery', query, parameters, queryRunner)
   }
 
   logQueryError(
@@ -62,19 +66,21 @@ export class TypeormLogger implements DbLogger {
     this.logger.error({ error, query: 'Executing query: ' + query })
   }
 
-  logQuerySlow(_time: number, _query: string, _parameters?: any[], _queryRunner?: QueryRunner) {
-    throw new Error('Method not implemented.')
+  logQuerySlow(_time: number, query: string, parameters?: any[], queryRunner?: QueryRunner) {
+    this._log('logQuerySlow', query, parameters, queryRunner)
   }
 
-  logSchemaBuild(_message: string, _queryRunner?: QueryRunner) {
-    throw new Error('Method not implemented.')
+  logSchemaBuild(message: string, queryRunner?: QueryRunner) {
+    this._log('logSchemaBuild ' + message, '', [], queryRunner)
   }
 
-  logMigration(_message: string, _queryRunner?: QueryRunner) {
-    throw new Error('Method not implemented.')
+  logMigration(message: string, queryRunner?: QueryRunner) {
+    this._log('logMigration ' + message, '', [], queryRunner)
   }
 
-  log(_level: 'log' | 'warn' | 'info', _message: any, _queryRunner?: QueryRunner) {
-    throw new Error('Method not implemented.')
+  log(level: 'log' | 'warn' | 'info', message: any, queryRunner?: QueryRunner) {
+    const requestUrl =
+      queryRunner && queryRunner.data['request'] ? '(' + queryRunner.data['request'].url + ') ' : ''
+    this.logger.log(`${level} Message: ${message}, requestUrl: ${requestUrl}`)
   }
 }
