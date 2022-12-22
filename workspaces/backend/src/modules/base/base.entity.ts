@@ -4,8 +4,8 @@ import {
   UpdateDateColumn,
   PrimaryColumn as _PrimaryColumn,
 } from 'typeorm'
-import { ObjectId } from 'mongodb'
-import { PrimaryColumn } from './decorator/base.decorator'
+import { PrimaryColumn } from '../../common/decorators/base.decorator'
+import { EntityIdType } from 'src/common/types/entity.type'
 
 export class BaseEntity<T> extends _BaseEntity {
   constructor(partial?: Partial<T>) {
@@ -14,7 +14,7 @@ export class BaseEntity<T> extends _BaseEntity {
   }
 
   @PrimaryColumn()
-  _id: number | ObjectId
+  _id: EntityIdType
 
   @CreateDateColumn({
     default: new Date().toISOString(),

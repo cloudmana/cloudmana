@@ -1,7 +1,7 @@
 import { ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { AuthGuard } from '@nestjs/passport'
-import { ROLES_KEY } from '../decorator/role.decorator'
+import { ROLES_KEY } from '../../../common/decorators/role.decorator'
 import { Role } from '../enums/role.enum'
 
 @Injectable()

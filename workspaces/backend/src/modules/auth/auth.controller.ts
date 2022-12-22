@@ -4,7 +4,7 @@ import { AuthService } from './auth.service'
 import { User } from '../user/user.entity'
 import { LocalAuthGuard } from './guard/local-auth.guard'
 import { JwtRefreshTokenGuard } from './guard/jwt-refresh-token.guard'
-import { CurrentUser } from './decorator/current-user.decorator'
+import { CurrentUser } from 'src/common/decorators/current-user.decorator'
 import { UserLoginRequestDto, UserSignupDto } from '../user/dto/user.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
 
