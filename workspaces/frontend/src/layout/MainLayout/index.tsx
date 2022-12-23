@@ -16,7 +16,7 @@ import { Box, Toolbar, useMediaQuery } from '@mui/material'
 // project import
 import Drawer from './Drawer'
 import Header from './Header'
-import navigation from 'src/menu-items'
+import navigation from 'src/navigation'
 import Breadcrumbs from 'src/components/@extended/Breadcrumbs'
 
 // types

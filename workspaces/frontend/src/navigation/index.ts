@@ -12,11 +12,16 @@ import utilities from './utilities'
 import support from './support'
 import analytics from './analytics'
 import services from './services'
+import account from './account'
 
 // ==============================|| MENU ITEMS ||============================== //
 
-const menuItems = {
+export const menuItems = {
   items: [dashboard, services, utilities, migration, analytics, support],
 }
 
-export default menuItems
+const navigation = {
+  items: [...menuItems.items, account],
+}
+
+export default navigation

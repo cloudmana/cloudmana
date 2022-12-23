@@ -6,14 +6,12 @@
  */
 
 import { createReducer, nanoid } from '@reduxjs/toolkit'
-import { ThemeType } from 'src/models/theme'
 import {
   addPopup,
   ApplicationModal,
   PopupContent,
   removePopup,
   setOpenModal,
-  setTheme,
   updateStep,
   setPendingSwitchAcc,
   setErrorApp,
@@ -32,7 +30,6 @@ export interface ErrorType {
   code?: number
 }
 export interface ApplicationState {
-  theme: string
   readonly popupList: PopupList
   readonly openModal: ApplicationModal | null
   step: string
@@ -42,7 +39,6 @@ export interface ApplicationState {
 }
 
 const initialState: ApplicationState = {
-  theme: ThemeType.LIGHT,
   popupList: [],
   openModal: null,
   step: '0',
@@ -53,9 +49,6 @@ const initialState: ApplicationState = {
 
 export default createReducer(initialState, (builder) =>
   builder
-    .addCase(setTheme, (state, action) => {
-      state.theme = action.payload
-    })
     .addCase(setOpenModal, (state, action) => {
       state.openModal = action.payload
     })
