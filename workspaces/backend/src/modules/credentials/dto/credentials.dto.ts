@@ -49,7 +49,7 @@ export class CredentialsImportDto {
     description: 'providerId',
     default: '',
   })
-  providerId: PrimaryIdType
+  provider: PrimaryIdType
 }
 
 export class CredentialsUpdateDto extends CredentialsImportDto {
@@ -91,7 +91,7 @@ export class CredentialsUpdateDto extends CredentialsImportDto {
     description: 'providerId',
     default: '',
   })
-  providerId: PrimaryIdType
+  provider: PrimaryIdType
 }
 
 export class CredentialsDeleteDto {

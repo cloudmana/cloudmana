@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators'
 import { instanceToPlain } from 'class-transformer'
 
 @Injectable()
-export class BaseTransferInterceptor implements NestInterceptor {
+export class BaseTransformInterceptor implements NestInterceptor {
   private updateBodyRequest(body: any) {
     if (body instanceof Object) {
       for (const key of Object.keys(body)) {

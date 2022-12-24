@@ -27,7 +27,7 @@ import { CredentialsModule } from '../credentials/credentials.module'
 import { ProvidersModule } from '../providers/providers.module'
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 import AnyExceptionFilter from 'src/common/filters/any-exception.filter'
-import { BaseTransferInterceptor } from '../../common/interceptors/response.interceptor'
+import { BaseTransformInterceptor } from '../../common/interceptors/transform.interceptor'
 
 const imports = [
   LoggerModule.forRootAsync({
@@ -66,7 +66,7 @@ if (config.cronjob.enable) {
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: BaseTransferInterceptor,
+      useClass: BaseTransformInterceptor,
     },
   ],
 })
