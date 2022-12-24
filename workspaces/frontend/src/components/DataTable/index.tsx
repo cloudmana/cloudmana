@@ -8,19 +8,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { makeStyles } from '@mui/styles'
 import { styled } from '@mui/material/styles'
-import {
-  DataGrid,
-  gridPageCountSelector,
-  gridPageSelector,
-  useGridApiContext,
-  useGridSelector,
-  GridColDef,
-  DataGridProps,
-} from '@mui/x-data-grid'
+import { DataGrid, GridColDef, DataGridProps } from '@mui/x-data-grid'
 import { Typography } from '@mui/material'
-import Pagination from '@mui/material/Pagination'
+import TablePagination from '@mui/material/TablePagination'
 import LinearProgress from '@mui/material/LinearProgress'
-import PaginationItem from '@mui/material/PaginationItem'
 import Input from 'src/components/Input'
 
 export interface TableRowProps {}
@@ -29,7 +20,7 @@ export interface DataTableProps {
   header?: GridColDef[]
   disableHeader?: boolean
   data?: TableRowProps[] | any[]
-  tableProps?: Omit<DataGridProps, 'row', 'columns'>
+  tableProps?: Omit<DataGridProps, 'rows' | 'columns'>
 }
 
 const useStyles = makeStyles({
@@ -82,28 +73,44 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }))
 
+const PaginationWrapper = styled('div')(({ theme }) => ({
+  display: 'flex',
+  width: '100%',
+  alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+  },
+}))
+
 function CustomPagination() {
-  const apiRef = useGridApiContext()
-  const page = useGridSelector(apiRef, gridPageSelector)
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector)
+  const [page, setPage] = useState(1)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+
+  const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
+    <PaginationWrapper>
       <Typography style={{ flex: 1 }}>
         <Input label="Find anythings" style={{ width: '90%' }} />
       </Typography>
-      <Pagination
-        color="primary"
-        variant="outlined"
-        shape="rounded"
-        page={page + 1}
-        count={pageCount}
-        renderItem={(props2) => <PaginationItem {...props2} />}
-        onChange={(event: React.ChangeEvent<unknown>, value: number) =>
-          apiRef.current.setPage(value - 1)
-        }
+      <TablePagination
+        component="div"
+        count={100}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </div>
+    </PaginationWrapper>
   )
 }
 
@@ -120,6 +127,7 @@ const DataTable = (props: DataTableProps) => {
           const output: GridColDef = {
             field: '',
             flex: 1,
+            minWidth: 100,
           }
           if (typeof key !== 'string') {
             return Object.assign(output, {
@@ -155,6 +163,7 @@ const DataTable = (props: DataTableProps) => {
           Pagination: CustomPagination,
           LoadingOverlay: LinearProgress,
         }}
+        hideFooterSelectedRowCount
         getRowId={(row) => row._id}
         {...tableProps}
       />
