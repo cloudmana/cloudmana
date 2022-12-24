@@ -6,12 +6,13 @@
  */
 
 import { IdColumn } from 'src/common/decorators/base.decorator'
-import { Column, Entity, Unique } from 'typeorm'
+import { Column, Entity, ManyToOne, Unique } from 'typeorm'
 import { BaseEntity } from '../base/base.entity'
-import { EntityIdType } from 'src/common/types/entity.type'
+import { Providers } from '../providers/providers.entity'
+import { User } from '../user/user.entity'
 
 @Entity({ name: 'credentials' })
-@Unique(['accessKeyId', 'secretAccessKey', 'userId', 'providerId'])
+@Unique(['accessKeyId', 'secretAccessKey', 'user', 'provider'])
 export class Credentials extends BaseEntity<Credentials> {
   @Column()
   name: string
@@ -22,9 +23,11 @@ export class Credentials extends BaseEntity<Credentials> {
   @Column({ nullable: false })
   secretAccessKey: string
 
-  @IdColumn({ name: 'providerId', nullable: false })
-  providerId: EntityIdType
+  @IdColumn({ name: 'provider', nullable: false })
+  @ManyToOne(() => Providers, (provider) => provider._id)
+  provider: Providers
 
-  @IdColumn({ name: 'userId', nullable: false })
-  userId: EntityIdType
+  @IdColumn({ name: 'user', nullable: false })
+  @ManyToOne(() => User, (user) => user._id)
+  user: User
 }

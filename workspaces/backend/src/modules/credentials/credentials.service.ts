@@ -26,7 +26,10 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
   async getAllCredentials(user: User, params): Promise<any> {
     const { page, limit } = params
     return await this.repository.paginate(
-      { userId: TypeOrmModuleHelper.transformCollectionId(user._id) },
+      {
+        userId: TypeOrmModuleHelper.transformCollectionId(user._id),
+        relations: ['provider', 'user'],
+      } as any,
       { page, limit },
     )
   }
@@ -36,8 +39,8 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
       where: {
         accessKeyId: credentials.accessKeyId,
         secretAccessKey: credentials.secretAccessKey,
-        providerId: TypeOrmModuleHelper.transformCollectionId(credentials.providerId),
-        userId: TypeOrmModuleHelper.transformCollectionId(user._id),
+        provider: TypeOrmModuleHelper.transformCollectionId(credentials.provider),
+        user: TypeOrmModuleHelper.transformCollectionId(user._id),
       },
     })
 
@@ -49,8 +52,8 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
       name: credentials.name,
       accessKeyId: credentials.accessKeyId,
       secretAccessKey: credentials.secretAccessKey,
-      providerId: credentials.providerId,
-      userId: user._id,
+      provider: credentials.provider,
+      user: user._id,
     }
     return await this.store(data)
   }
@@ -68,7 +71,7 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
 
     const provider = await this.providersRepository.findOne({
       where: {
-        _id: TypeOrmModuleHelper.transformCollectionId(credentials.providerId),
+        _id: TypeOrmModuleHelper.transformCollectionId(credentials.provider),
       },
     })
     if (!provider) {
@@ -80,14 +83,14 @@ export class CredentialsService extends BaseService<Credentials, CredentialsRepo
       name: credentials.name,
       accessKeyId: credentials.accessKeyId,
       secretAccessKey: credentials.secretAccessKey,
-      providerId: credentials.providerId,
+      provider: credentials.provider,
     }
     return await this.store(data)
   }
 
   async deleteCredentials(user: User, credentials: CredentialsDeleteDto): Promise<boolean> {
     const _ids = await this.findByIds(credentials._ids)
-    const ids = _ids.filter((creds) => creds.userId.toString() === user._id.toString())
+    const ids = _ids.filter((creds) => creds.user.toString() === user._id.toString())
     await this.deleteMany(ids)
     return true
   }
