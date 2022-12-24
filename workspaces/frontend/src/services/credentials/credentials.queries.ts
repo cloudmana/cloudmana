@@ -11,7 +11,7 @@ import { getList } from './credentials.service'
 import { ICredentialsRequest } from './credentials.type'
 import { ICredentials } from 'src/models/credentials'
 
-export const useCredentialsList = (params: ICredentialsRequest) => {
+export const useCredentialsList = (params?: ICredentialsRequest) => {
   const [addToast] = useToastMessage()
 
   return useQuery<ICredentials[]>({

@@ -11,7 +11,7 @@ import { getList } from './provider.service'
 import { IProviderRequest } from './provider.type'
 import { IProvider } from 'src/models/provider'
 
-export const useProviderList = (params: IProviderRequest) => {
+export const useProviderList = (params?: IProviderRequest) => {
   const [addToast] = useToastMessage()
 
   return useQuery<IProvider[]>({

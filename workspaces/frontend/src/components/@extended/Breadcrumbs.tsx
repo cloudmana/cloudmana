@@ -19,7 +19,7 @@ import MainCard from '../MainCard'
 
 // ==============================|| BREADCRUMBS ||============================== //
 
-const Breadcrumbs = ({ navigation, title, ...others }: any) => {
+const Breadcrumbs = ({ navigation, ...others }: any) => {
   const router = useRouter()
   const [main, setMain] = useState<any>()
   const [item, setItem] = useState<any>()
@@ -110,11 +110,6 @@ const Breadcrumbs = ({ navigation, title, ...others }: any) => {
                 {itemContent}
               </MuiBreadcrumbs>
             </Grid>
-            {/* {title && (
-              <Grid item sx={{ mt: 2 }}>
-                <Typography variant="h5">{item.title}</Typography>
-              </Grid>
-            )} */}
           </Grid>
         </MainCard>
       )
