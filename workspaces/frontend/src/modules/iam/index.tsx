@@ -7,17 +7,14 @@
 
 import { SyntheticEvent, useState } from 'react'
 
-// material-ui
-import { Typography } from '@mui/material'
-
 // project import
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { KeyOutlined, TeamOutlined } from '@ant-design/icons'
 
 import MainCard from 'src/components/MainCard'
-import DataTable from 'src/components/DataTable'
-import { GridColDef } from '@mui/x-data-grid'
+import Credentials from './credentials'
+import Users from './users'
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 interface TabPanelProps {
@@ -37,30 +34,13 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Typography component={'span'}>{children}</Typography>}
+      {value === index && children}
     </div>
   )
 }
 
-const columnsUsers: GridColDef[] = [
-  { field: 'ID' },
-  { field: 'Username' },
-  { field: 'Fullname' },
-  { field: 'Role' },
-]
-const columnsCredentials: GridColDef[] = [
-  { field: 'ID' },
-  { field: 'AccessKey' },
-  { field: 'Owner' },
-]
-
 const Iam = () => {
   const [value, setValue] = useState(0)
-  const [order] = useState('asc')
-  const [orderBy] = useState('trackingNo')
-  const [selected] = useState<any>([])
-
-  const isSelected = (trackingNo: any) => selected.indexOf(trackingNo) !== -1
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -76,20 +56,10 @@ const Iam = () => {
       }
     >
       <TabPanel value={value} index={0}>
-        <DataTable header={columnsUsers} />
+        <Users />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <DataTable
-          header={columnsCredentials}
-          data={Array(10)
-            .fill(0)
-            .map(() => ({
-              id: Math.round(Math.random() * 10000),
-              ID: Math.round(Math.random() * 10000),
-              AccessKey: 'AccessKey',
-              Owner: '523423432',
-            }))}
-        />
+        <Credentials />
       </TabPanel>
     </MainCard>
   )

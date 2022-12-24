@@ -41,9 +41,9 @@
     "./node_modules/**/*"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.(png|jpg)"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.(png|jpg)"
   ],
   "typeRoots": [
     "./node_modules/@types",
