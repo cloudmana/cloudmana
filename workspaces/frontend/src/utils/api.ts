@@ -11,6 +11,7 @@ import env from '../config/env'
 import { isNil } from '../functions/validate'
 import { authSlice, getCurrentUser } from '../state/auth'
 import { AuthStatus } from '../state/auth/types'
+import { IBaseResponse } from 'src/models/base'
 
 export const clientApi = axios.create({ baseURL: env.SERVER_API })
 
@@ -20,7 +21,7 @@ export const setupAuthInterceptor = (store: Store) => {
     if (token) {
       requestConfig.headers = {
         ...requestConfig.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.accessToken}`,
       }
     }
     return requestConfig

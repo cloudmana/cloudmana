@@ -5,8 +5,6 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { useSelector } from 'react-redux'
-
 // material-ui
 import { Button, CardMedia, Link, Stack, Typography } from '@mui/material'
 
@@ -19,16 +17,10 @@ import AnimateButton from 'src/components/@extended/AnimateButton'
 // ==============================|| DRAWER CONTENT - NAVIGATION CARD ||============================== //
 
 const NavCard = () => {
-  const drawerOpen = useSelector((state: any) => state.menu.drawerOpen)
-
   return (
     <MainCard sx={{ bgcolor: 'grey.50', m: 3 }}>
       <Stack alignItems="center" spacing={2.5}>
-        <CardMedia
-          component="img"
-          image={drawerOpen ? '/assets/images/logo.png' : '/assets/images/logo.svg'}
-          sx={{ width: 112 }}
-        />
+        <CardMedia component="img" image={'/assets/images/logo.png'} sx={{ width: 112 }} />
         <Stack alignItems="center">
           <Typography variant="h5">Cloudmana Pro</Typography>
           <Typography variant="h6" color="secondary">

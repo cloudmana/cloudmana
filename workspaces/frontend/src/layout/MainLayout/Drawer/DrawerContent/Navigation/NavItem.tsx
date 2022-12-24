@@ -204,7 +204,9 @@ const NavItem = ({ item, level, onClick, open, setOpen }: NavItemProps) => {
             avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
           />
         )}
-        {item.type === 'collapse' && (openCollapse ? <CaretUpOutlined /> : <CaretDownOutlined />)}
+        {item.type === 'collapse' &&
+          drawerOpen &&
+          (openCollapse ? <CaretUpOutlined /> : <CaretDownOutlined />)}
       </ListItemButton>
       {item.type === 'collapse' && (
         <Collapse in={openCollapse} timeout="auto" unmountOnExit>

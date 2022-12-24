@@ -22,7 +22,7 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
-    "target": "es5",
+    "target": "es2015",
     "outDir": "build",
     "declaration": true,
     "sourceMap": true,
@@ -41,9 +41,9 @@
     "./node_modules/**/*"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.(png|jpg)"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.(png|jpg)"
   ],
   "typeRoots": [
     "./node_modules/@types",

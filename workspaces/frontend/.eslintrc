@@ -48,13 +48,14 @@
   "settings": {
     "import/resolver": {
       "alias": [
-        ["@assets", "./src/assets"],
-        ["@pages", "./src/pages"],
-        ["@contexts", "./src/contexts"],
-        ["@components", "./src/components"],
-        ["@modules", "./src/modules"],
-        ["@sections", "./src/sections"],
-        ["@themes", "./src/themes"],
+        ["src", "./src"],
+        ["assets", "./src/assets"],
+        ["pages", "./src/pages"],
+        ["contexts", "./src/contexts"],
+        ["components", "./src/components"],
+        ["modules", "./src/modules"],
+        ["sections", "./src/sections"],
+        ["themes", "./src/themes"],
         ["@", "./src"]
       ]
     }

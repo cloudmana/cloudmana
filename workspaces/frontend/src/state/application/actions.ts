@@ -40,7 +40,6 @@ export enum TimeFilterEnum {
   D30 = '30d',
 }
 
-export const setTheme = createAction<string>('application/setTheme')
 export const setOpenModal = createAction<ApplicationModal | null>('application/setOpenModal')
 export const addPopup = createAction<{
   key?: string

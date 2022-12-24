@@ -19,11 +19,12 @@ import Typography from './typography'
 import CustomShadows from './shadows'
 import componentsOverride from './overrides'
 import { ThemeType } from 'src/models/theme'
+import { RootState } from 'src/state/reducer'
 
 // ==============================|| DEFAULT THEME - MAIN  ||============================== //
 
 export default function ThemeCustomization({ children }: any) {
-  const _theme = useSelector((state: any) => state.application.theme)
+  const _theme = useSelector((state: RootState) => state.settings.theme)
   const theme = Palette(_theme || ThemeType.LIGHT)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

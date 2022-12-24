@@ -17,13 +17,14 @@ import Profile from './Profile'
 import Notification from './Notification'
 import MobileSection from './MobileSection'
 import { MaterialUISwitch } from 'src/components/Switch'
-import { setTheme } from 'src/state/application/actions'
+import { setTheme } from 'src/state/settings/actions'
 import { ThemeType } from 'src/models/theme'
+import { RootState } from 'src/state/reducer'
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
-  const theme = useSelector((state: any) => state.application.theme)
+  const theme = useSelector((state: RootState) => state.settings.theme)
   const dispatch = useDispatch()
   const matchesXs = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
 

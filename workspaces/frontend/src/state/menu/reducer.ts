@@ -16,7 +16,7 @@ export interface MenuState {
 }
 
 const initialState: MenuState = {
-  openItem: ['dashboard'],
+  openItem: ['welcome'],
   openComponent: 'buttons',
   drawerOpen: false,
   componentDrawerOpen: true,
