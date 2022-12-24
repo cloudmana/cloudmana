@@ -11,6 +11,7 @@ RUN yarn
 
 # Copy source code & build
 COPY workspaces ./workspaces
+COPY workspaces/frontend/.env.prod ./workspaces/frontend/.env
 RUN yarn api build
 RUN yarn app build && yarn app export
 
