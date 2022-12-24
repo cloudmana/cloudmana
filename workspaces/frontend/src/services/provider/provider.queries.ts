@@ -7,15 +7,15 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { useToastMessage, ToastTypes } from 'src/hooks/useToastMessage'
-import { getList } from './credentials.service'
-import { ICredentialsRequest } from './credentials.type'
-import { ICredentials } from 'src/models/credentials'
+import { getList } from './provider.service'
+import { IProviderRequest } from './provider.type'
+import { IProvider } from 'src/models/provider'
 
-export const useCredentialsList = (params: ICredentialsRequest) => {
+export const useProviderList = (params: IProviderRequest) => {
   const [addToast] = useToastMessage()
 
-  return useQuery<ICredentials[]>({
-    queryKey: ['credentialsList'],
+  return useQuery<IProvider[]>({
+    queryKey: ['providerList'],
     queryFn: () => getList(params),
     onSuccess: (data: any) => {
       return data
