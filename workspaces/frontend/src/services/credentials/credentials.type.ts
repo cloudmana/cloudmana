@@ -7,3 +7,10 @@
 
 export interface ICredentialsRequest {}
 export interface ICredentialsResponse {}
+
+export interface ICredentialsImportRequest {
+  name?: string
+  accessKeyId: string
+  secretAccessKey: string
+  provider: string
+}
