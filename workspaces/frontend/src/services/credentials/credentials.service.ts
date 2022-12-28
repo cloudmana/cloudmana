@@ -6,7 +6,7 @@
  */
 
 import { clientApi } from 'src/utils/api'
-import { ICredentialsRequest } from './credentials.type'
+import { ICredentialsImportRequest, ICredentialsRequest } from './credentials.type'
 import { ICredentials } from 'src/models/credentials'
 
 export const getList = (params?: ICredentialsRequest): Promise<ICredentials[]> => {
@@ -15,6 +15,13 @@ export const getList = (params?: ICredentialsRequest): Promise<ICredentials[]> =
   })
 }
 
+export const postImport = (data: ICredentialsImportRequest): Promise<ICredentials> => {
+  return clientApi.post<ICredentials>('/api/v1/cloudmana/credentials', data).then((res) => {
+    return res.data
+  })
+}
+
 export const credentialService = {
   getList,
+  postImport,
 }

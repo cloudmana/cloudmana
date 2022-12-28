@@ -38,7 +38,10 @@ const imports = [
   CacheModule.register(config.cacheConfig),
   ServeStaticModule.forRoot({
     rootPath: process.env.APP_CLIENT_DIR || join(__dirname, '../../../../', 'frontend', 'out'),
-    exclude: [config.baseUrl + '*'],
+    exclude: [config.baseUrl + '*', config.swagger.baseUrl + '*'],
+    serveStaticOptions: {
+      extensions: ['html'],
+    },
   }),
   DiscoveryModule,
   TypeOrmModule.forRootAsync({ useClass: TypeOrmModuleConfig }),

@@ -5,9 +5,9 @@
  * @copyright (c) 2022 Cloudmana Platform
  */
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useToastMessage, ToastTypes } from 'src/hooks/useToastMessage'
-import { getList } from './credentials.service'
+import { getList, postImport } from './credentials.service'
 import { ICredentialsRequest } from './credentials.type'
 import { ICredentials } from 'src/models/credentials'
 
@@ -21,7 +21,24 @@ export const useCredentialsList = (params?: ICredentialsRequest) => {
       return data
     },
     onError: (error: any) => {
-      addToast(ToastTypes.ERROR, error)
+      addToast(ToastTypes.ERROR, error.message)
+    },
+    retry: false,
+  })
+}
+
+export const useCredentialsImport = () => {
+  const [addToast] = useToastMessage()
+
+  return useMutation({
+    mutationKey: ['credentialsImport'],
+    mutationFn: (data: any) => postImport(data),
+    onSuccess: (data: any) => {
+      addToast(ToastTypes.SUCCESS, 'Credential import successfully')
+      return data
+    },
+    onError: (error: any) => {
+      addToast(ToastTypes.ERROR, error.message)
     },
     retry: false,
   })

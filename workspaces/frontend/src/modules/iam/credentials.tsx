@@ -7,11 +7,13 @@
 
 import DataTable from 'src/components/DataTable'
 import { GridColDef } from '@mui/x-data-grid'
-import { Button, Typography } from '@mui/material'
+import { Button, IconButton, Typography } from '@mui/material'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import LoadingButton from '@mui/lab/LoadingButton'
 import { useCredentialsList } from 'src/services/credentials/credentials.queries'
 import ButtonAction from 'src/components/ButtonGroup/menu'
 import ModalCredentialsImport from './components/ModalCredentialsImport'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const columnsCredentials: GridColDef[] = [
   { field: '_id', headerName: 'ID' },
@@ -33,11 +35,19 @@ const columnsCredentials: GridColDef[] = [
 
 const Credentials = () => {
   const [openModalImport, setOpenModalImport] = useState<boolean>(false)
-  const { data, isLoading } = useCredentialsList({ params: { page: 1, limit: 10 } })
+  const { data, isLoading, isFetching, refetch } = useCredentialsList({
+    params: { page: 1, limit: 10 },
+  })
 
   const handleImportClick = () => {
     setOpenModalImport(true)
   }
+
+  useEffect(() => {
+    if (!openModalImport) {
+      refetch()
+    }
+  }, [openModalImport])
 
   return (
     <>
@@ -49,9 +59,17 @@ const Credentials = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant='h5' sx={{ flex: 1 }} component="div">
+        <Typography variant="h5" sx={{ flex: 1 }} component="div">
           <b>Credentials ({data?.length || 0})</b>
         </Typography>
+        <IconButton
+          disabled={isFetching || isLoading}
+          onClick={refetch as any}
+          style={{ marginRight: '10px' }}
+          size={'large'}
+        >
+          {isFetching || isLoading ? <LoadingButton /> : <RefreshIcon />}
+        </IconButton>
         <ButtonAction />
         <Button variant="contained" onClick={handleImportClick} style={{ marginLeft: '10px' }}>
           Import
@@ -62,7 +80,7 @@ const Credentials = () => {
         header={columnsCredentials}
         data={data}
         tableProps={{
-          loading: isLoading,
+          loading: isFetching || isLoading,
         }}
       />
     </>
