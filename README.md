@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://thinhhv.com/cloudmana" target="blank">
+  <a href="https://cloudmana.thinhhv.com" target="_blank">
     <img style="width: 350px;" src="workspaces/frontend/public/assets/images/cloudmana.svg" alt="Cloudmana landing page" />
   </a>
 </p>
