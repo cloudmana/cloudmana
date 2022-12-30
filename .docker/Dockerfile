@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 COPY workspaces/backend/package.json ./workspaces/backend/package.json
 COPY workspaces/frontend/package.json ./workspaces/frontend/package.json
-RUN yarn
+RUN yarn --network-timeout 120000
 
 # Copy source code & build
 COPY workspaces ./workspaces
