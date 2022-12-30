@@ -23,7 +23,7 @@ WORKDIR /app
 
 # Copy & install dependencies
 COPY workspaces/backend/package.json yarn.lock ./
-RUN yarn --prod
+RUN yarn --prod --network-timeout 120000
 
 # ===========================
 FROM node:16-alpine
