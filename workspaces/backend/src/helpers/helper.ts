@@ -15,7 +15,7 @@ import {
   PER_PAGE_HEADER_NAME,
   PAGES_COUNT_HEADER_NAME,
 } from 'src/common/constants'
-import { BaseResponse } from 'src/modules/base/base.response'
+import { BaseResponse, BaseResponsePagination } from 'src/modules/base/base.response'
 import { Readable } from 'stream'
 import { HttpException, InternalServerErrorException } from '@nestjs/common'
 import { IPaginationOptions } from 'nestjs-typeorm-paginate'
@@ -71,7 +71,7 @@ export const APPLICATION_JSON = 'application/json'
 export const ACCESS_TOKEN_HEADER_NAME = 'apiKey'
 export const SUB_HEADER_NAME = 'sub'
 
-export const generatePaginationHeaderV2 = (paginatinatedResult: BaseResponse<any>) => {
+export const generatePaginationHeaderV2 = (paginatinatedResult: BaseResponsePagination<any>) => {
   const { meta } = paginatinatedResult
   return {
     [TOTAL_COUNT_HEADER_NAME]: meta.totalItems,
@@ -93,7 +93,7 @@ export function genRandomString(length: number) {
   return result
 }
 
-export const generatePaginationMetadata = (paginatedResult: BaseResponse<any>) => {
+export const generatePaginationMetadata = (paginatedResult: BaseResponsePagination<any>) => {
   return { ...paginatedResult.meta }
 }
 

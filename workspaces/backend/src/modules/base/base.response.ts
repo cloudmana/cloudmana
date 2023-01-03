@@ -7,4 +7,8 @@
 
 import { Pagination } from 'nestjs-typeorm-paginate'
 
-export class BaseResponse<T> extends Pagination<T> {}
+export class BaseResponsePagination<T> extends Pagination<T> {}
+
+export class BaseResponse<T> {
+  data: T
+}

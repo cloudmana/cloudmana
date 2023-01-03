@@ -10,16 +10,16 @@ import axios from 'axios'
 import env from '../../config/env'
 import { authSlice } from './index'
 import { AppState } from '../index'
-import { AuthState, AuthStatus, LoggedInAccount, User } from './types'
+import { AuthState, AuthStatus, LoggedInAccount } from './types'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { DependencyList, useEffect, useMemo } from 'react'
 import { setOpenModal } from '../application/actions'
-import { clientApi } from '../../utils/api'
 import { useSetPendingSwitchAcc } from '../application/hooks'
 import { ToastTypes, useToastMessage } from 'src/hooks/useToastMessage'
 // import { useUpdateNotification } from '../notification/hooks'
 import { ILoginRequest, IRegisterRequest } from 'src/services/auth/auth.type'
 import { postRegister } from 'src/services/auth/auth.service'
+import { getProfile } from 'src/services/user/user.service'
 
 export function useAuthState(): AuthState {
   return useAppSelector((state: AppState) => state.auth)
@@ -135,9 +135,9 @@ export function useAutoFetchCurrentUser(dependencies: DependencyList = []) {
   const { token } = useAuthState()
 
   const [, fetchCurrentUser] = useAsyncFn(async () => {
-    const { data: user } = await clientApi.get<User>('api/cloudmana/profile/me')
+    const user = await getProfile()
 
-    appDispatch(authSlice.actions.setCurrentUser({ user }))
+    appDispatch(authSlice.actions.setCurrentUser({ user } as any))
   }, [fetch, appDispatch])
 
   useEffect(() => {

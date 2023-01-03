@@ -7,10 +7,9 @@
 
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { User } from './user.entity'
+import { User } from 'src/modules/user/user.entity'
 import { UserRepository } from './user.repository'
-import { BaseService } from '../base/base.service'
-import { BaseResponse } from '../base/base.response'
+import { BaseService } from '../../base/base.service'
 
 @Injectable()
 export class UserService extends BaseService<User, UserRepository> {
@@ -22,9 +21,11 @@ export class UserService extends BaseService<User, UserRepository> {
     super(repository)
   }
 
-  async getProfile(user: User): Promise<BaseResponse<User>> {
-    return {
-      data: await this.repository.findById(user._id),
-    }
+  // findByEmail(email: string): Promise<User | null> {
+  //   return this.repository.findOne({ email: email })
+  // }
+
+  getInactiveUsers(): Promise<User[]> {
+    return this.repository.getInactiveUsers()
   }
 }

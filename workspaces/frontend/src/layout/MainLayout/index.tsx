@@ -22,6 +22,7 @@ import Breadcrumbs from 'src/components/@extended/Breadcrumbs'
 // types
 import { openDrawer } from 'src/state/menu/actions'
 import { RootState } from 'src/state/reducer'
+import { useAutoFetchCurrentUser } from 'src/state/auth/hooks'
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -30,6 +31,7 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
   const matchDownLG = useMediaQuery(theme.breakpoints.down('xl'))
   const dispatch = useDispatch()
   const router = useRouter()
+  const _ = useAutoFetchCurrentUser()
 
   const { drawerOpen } = useSelector((state: RootState) => state.menu)
   const { token } = useSelector((state: RootState) => state.auth)

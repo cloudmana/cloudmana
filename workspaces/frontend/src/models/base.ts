@@ -20,6 +20,10 @@ export interface IBaseMetadata {
 }
 
 export interface IBaseResponse<T> {
+  data: T
+}
+
+export interface IBaseResponsePagination<T> {
   data: T[]
   metadata: IBaseMetadata
 }
