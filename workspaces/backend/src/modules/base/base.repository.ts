@@ -8,6 +8,7 @@
 import { FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from 'typeorm'
 import { TypeormAdapter } from 'src/modules/_shared/databases/typeorm.adapter'
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate'
+import { TypeOrmModuleHelper } from '../_shared/databases/typeorm.helper'
 
 export class BaseRepository<T> extends Repository<T> {
   private readonly adapter = new TypeormAdapter()
@@ -20,6 +21,14 @@ export class BaseRepository<T> extends Repository<T> {
   find(options?: FindManyOptions) {
     const opts = this.adapter.buildQuery(options)
     return this.repository.find(opts)
+  }
+
+  findById(id: any) {
+    return this.repository.findOne({
+      where: {
+        _id: TypeOrmModuleHelper.convertCollectionId(id),
+      },
+    } as any)
   }
 
   findOne(options?: FindOneOptions) {

@@ -21,6 +21,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from '../auth/auth.module'
 // import { SocketModule } from '../socket/socket.module'
+import { AdminModule } from '../admin/admin.module'
 import { UserModule } from '../user/user.module'
 import { AwsModule } from '../aws/aws.module'
 import { CredentialsModule } from '../credentials/credentials.module'
@@ -52,6 +53,7 @@ const imports = [
   AwsModule,
   CredentialsModule,
   ProvidersModule,
+  AdminModule,
 ]
 
 if (config.cronjob.enable) {

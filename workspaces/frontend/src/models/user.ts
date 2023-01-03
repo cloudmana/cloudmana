@@ -6,12 +6,13 @@
  */
 
 export interface IUser {
-  id: number | string
+  _id: number | string
   email: string
   username: string
   avatar?: string
   firstName: string
   lastName: string
+  fullName: string
   isActive: boolean
   role: string
   roles: string
