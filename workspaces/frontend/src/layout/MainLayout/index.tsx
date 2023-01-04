@@ -31,7 +31,7 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
   const matchDownLG = useMediaQuery(theme.breakpoints.down('xl'))
   const dispatch = useDispatch()
   const router = useRouter()
-  const _ = useAutoFetchCurrentUser()
+  useAutoFetchCurrentUser()
 
   const { drawerOpen } = useSelector((state: RootState) => state.menu)
   const { token } = useSelector((state: RootState) => state.auth)

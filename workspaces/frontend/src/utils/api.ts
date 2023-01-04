@@ -15,7 +15,7 @@ import { AuthStatus } from '../state/auth/types'
 export const clientApi = axios.create({ baseURL: env.SERVER_API })
 
 export const setupAuthInterceptor = (store: Store) => {
-  clientApi.interceptors.request.use((requestConfig) => {
+  clientApi.interceptors.request.use((requestConfig: any) => {
     const { token } = getCurrentUser(store.getState())
     if (token) {
       requestConfig.headers = {
