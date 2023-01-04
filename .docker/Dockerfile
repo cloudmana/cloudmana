@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 COPY workspaces/backend/package.json ./workspaces/backend/package.json
 COPY workspaces/frontend/package.json ./workspaces/frontend/package.json
-RUN yarn --network-timeout 120000
+RUN yarn --network-timeout 1000000
 
 # Copy source code & build
 COPY workspaces ./workspaces
@@ -23,10 +23,12 @@ WORKDIR /app
 
 # Copy & install dependencies
 COPY workspaces/backend/package.json yarn.lock ./
-RUN yarn --prod --network-timeout 120000
+RUN yarn --prod --network-timeout 1000000
 
 # ===========================
 FROM node:16-alpine
+LABEL maintainer="thinh@thinhhv.com"
+LABEL description="Setup server and serve static resource."
 
 # Workdir
 WORKDIR /app
